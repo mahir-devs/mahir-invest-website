@@ -7,7 +7,7 @@ import { WhiteLogo } from '@/components/svg/logo';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="relative border-t-1 !border-[var(--blue-normal)]/10 w-full bg-[#ffffff] pt-16 pb-12 overflow-hidden select-none">
+    <footer className="relative  w-full bg-[#ffffff] pt-16 pb-12 overflow-hidden select-none">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-7 sm:space-y-8">
         {/* Top Logo Glass Pill Container with border-blue-normal */}
         <div className="flex justify-center">

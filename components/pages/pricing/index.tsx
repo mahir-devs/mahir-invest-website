@@ -1,16 +1,19 @@
 'use client';
 
+import React, { useState } from 'react';
 import CloudAnimation from '@/components/animations/ClaudeAnimation';
 import PricingSection from '@/components/pages/home/pricing-section';
 import FeaturesSection from '@/components/pages/home/features-section';
 import ExpensiveItemsSection from '@/components/pages/home/expensive-items-section';
 import { Footer } from '@/components/common/footer';
 import { GlassCard } from '@/components/ui/glass-card';
-import { GlassButton } from '@/components/ui/glass-button';
 import { SectionDivider } from '@/components/common/section-divider';
 import { MotionContainer, MotionItem } from '@/components/animations';
+import { ContactSupportDialog } from '@/components/common/contact-support-dialog';
 
 export const PricingPage = () => {
+  const [showContactDialog, setShowContactDialog] = useState(false);
+
   return (
     <div className="relative w-full min-h-screen overflow-hidden select-none">
       {/* Top Hero Blue Gradient & Cloud Background Container */}
@@ -55,14 +58,13 @@ export const PricingPage = () => {
                 </div>
 
                 <div className="pt-2">
-                  <a href="/who-we-are#contact-us" className="inline-block w-full sm:w-auto">
-                    <button
-
-                      className="w-full text-black! rounded-full! cursor-pointer! border-[var(--blue-normal)]! border-1 font-medium sm:w-auto px-8 py-3 rounded-full text-white font-medium"
-                    >
-                      Talk to Us
-                    </button>
-                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setShowContactDialog(true)}
+                    className="w-full text-black! rounded-full! cursor-pointer! border-[var(--blue-normal)]! border-1 font-medium sm:w-auto px-8 py-3 rounded-full text-white font-medium"
+                  >
+                    Talk to Us
+                  </button>
                 </div>
               </GlassCard>
             </MotionItem>
@@ -71,8 +73,12 @@ export const PricingPage = () => {
 
         <Footer />
       </div>
+
+      {/* Contact Support Dialog */}
+      <ContactSupportDialog open={showContactDialog} onOpenChange={setShowContactDialog} />
     </div>
   );
 };
 
 export default PricingPage;
+
