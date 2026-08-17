@@ -10,17 +10,19 @@ import { SectionDivider } from '@/components/common/section-divider';
 import { MotionContainer, MotionItem } from '@/components/animations';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { LogOut, Camera, Loader2, CheckCircle2, AlertCircle, Pencil, X, Check } from 'lucide-react';
+import { LogOut, Camera, Loader2, CheckCircle2, AlertCircle, Pencil, X, Check, ChevronDown } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
 } from '@/components/ui/dialog';
 import { useAuthStore } from '@/store/auth.store';
-import { getProfileAPI, updateProfileAPI } from '@/services/auth.api';
+import { getProfileAPI, updateProfileAPI, sendOtpAPI, verifyEmailOtpAPI } from '@/services/auth.api';
 import { verifyUserSubscription } from '@/services/subscription.api';
 import { getItem } from '@/utils/storage';
 import { STORAGE_KEYS } from '@/constants/storageKeys';
 import { toast } from '@/components/ui/toast';
+import { EmailOtpVerificationModal, EmailVerifiedSuccessModal } from '@/components/common/email-verification/email-verification-modals';
+import { INDIAN_STATES_LIST } from '@/constants/indian-states';
 
 export const ProfilePage = () => {
   const router = useRouter();
@@ -40,9 +42,18 @@ export const ProfilePage = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
+  const [address, setAddress] = useState('');
+  const [stateName, setStateName] = useState('');
 
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string>('');
+
+  // Email verification state
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [verifyingEmail, setVerifyingEmail] = useState('');
+  const [sendingOtp, setSendingOtp] = useState(false);
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // Load real profile data & enforce route protection
   const loadProfileData = async () => {
@@ -58,10 +69,29 @@ export const ProfilePage = () => {
       const userData = res?.data?.data || res?.data?.user || res?.data || res?.user || res || storeUser;
 
       if (userData) {
-        setFirstName(userData.firstName || userData.name?.split(' ')[0] || '');
-        setLastName(userData.lastName || userData.name?.split(' ').slice(1).join(' ') || '');
-        setEmail(userData.email || '');
-        setMobile(userData.phone || userData.mobile || '');
+        if (!isEditing) {
+          setFirstName(userData.firstName || userData.name?.split(' ')[0] || '');
+          setLastName(userData.lastName || userData.name?.split(' ').slice(1).join(' ') || '');
+          setEmail(userData.email || '');
+          const rawAddr = userData.address;
+          const addrStr =
+            typeof rawAddr === 'object' && rawAddr !== null
+              ? rawAddr.fullAddress || rawAddr.address || ''
+              : typeof rawAddr === 'string'
+                ? rawAddr
+                : userData.fullAddress || '';
+
+          const stateStr =
+            typeof rawAddr === 'object' && rawAddr !== null
+              ? rawAddr.state || userData.state || ''
+              : userData.state || '';
+
+          setAddress(addrStr);
+          setStateName(stateStr);
+        }
+
+        setMobile(String(userData.phone || userData.mobile || userData.phoneNumber || storeUser?.phone || storeUser?.mobile || storeUser?.phoneNumber || '').replace(/\D/g, ''));
+        setIsEmailVerified(Boolean(userData.isEmailVerified || userData.emailVerifiedAt || userData.isVerified));
 
         const currentUserId = userData.id || userData._id || userData.userId || storeUser?.id || storeUser?._id;
 
@@ -155,22 +185,84 @@ export const ProfilePage = () => {
     }
   };
 
+  const handleInitiateEmailVerify = async () => {
+    const targetEmail = email?.trim() || '';
+    if (!targetEmail || !targetEmail.includes('@')) {
+      toast.add({
+        title: 'Invalid Email',
+        description: 'Please enter a valid email address to verify.',
+        type: 'error',
+      });
+      return;
+    }
+    try {
+      setVerifyingEmail(targetEmail);
+      setSendingOtp(true);
+      await sendOtpAPI(targetEmail);
+      setShowOtpModal(true);
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || 'Failed to send verification OTP code.';
+      toast.add({
+        title: 'Verification Failed',
+        description: msg,
+        type: 'error',
+      });
+    } finally {
+      setSendingOtp(false);
+    }
+  };
+
+  const handleVerifyProfileOtp = async (code: string) => {
+    const emailToVerify = verifyingEmail || email?.trim() || '';
+    if (!emailToVerify || !emailToVerify.includes('@')) {
+      toast.add({
+        title: 'Error',
+        description: 'No valid email address found to verify.',
+        type: 'error',
+      });
+      return;
+    }
+    await verifyEmailOtpAPI({ email: emailToVerify, code });
+    setEmail(emailToVerify);
+    setIsEmailVerified(true);
+    setShowOtpModal(false);
+    setShowSuccessModal(true);
+    await getProfile();
+    await loadProfileData();
+  };
+
+  const handleResendProfileOtp = async () => {
+    const emailToResend = verifyingEmail || email?.trim() || '';
+    if (!emailToResend) return;
+    await sendOtpAPI(emailToResend);
+  };
+
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setFeedback(null);
     setUpdating(true);
 
     try {
-      const formData = new FormData();
-      formData.append('firstName', firstName);
-      formData.append('lastName', lastName);
-      formData.append('email', email);
-
+      let payload: any;
       if (avatarFile) {
-        formData.append('avatar', avatarFile);
+        payload = new FormData();
+        payload.append('firstName', firstName);
+        payload.append('lastName', lastName);
+        if (email) payload.append('email', email);
+        if (address) payload.append('fullAddress', address);
+        if (stateName) payload.append('state', stateName);
+        payload.append('avatar', avatarFile);
+      } else {
+        payload = {
+          firstName,
+          lastName,
+          email: email || undefined,
+          fullAddress: address || undefined,
+          state: stateName || undefined,
+        };
       }
 
-      await updateProfileAPI(formData);
+      await updateProfileAPI(payload);
       await getProfile();
       await loadProfileData();
 
@@ -208,13 +300,23 @@ export const ProfilePage = () => {
       setFirstName(storeUser.firstName || storeUser.name?.split(' ')[0] || '');
       setLastName(storeUser.lastName || storeUser.name?.split(' ').slice(1).join(' ') || '');
       setEmail(storeUser.email || '');
-      setMobile(storeUser.phone || storeUser.mobile || '');
+      setMobile(String(storeUser.phone || storeUser.mobile || storeUser.phoneNumber || '').replace(/\D/g, ''));
+      const rawAddr = storeUser.address;
+      const addrStr =
+        typeof rawAddr === 'object' && rawAddr !== null
+          ? rawAddr.fullAddress || rawAddr.address || ''
+          : typeof rawAddr === 'string'
+            ? rawAddr
+            : storeUser.fullAddress || '';
+
+      const stateStr =
+        typeof rawAddr === 'object' && rawAddr !== null
+          ? rawAddr.state || storeUser.state || ''
+          : storeUser.state || '';
+
+      setAddress(addrStr);
+      setStateName(stateStr);
     }
-    // toast.add({
-    //   title: 'Edits Reset',
-    //   description: 'Profile changes were cancelled.',
-    //   type: 'info',
-    // });
   };
 
   const handleSignOutClick = () => {
@@ -350,7 +452,7 @@ export const ProfilePage = () => {
 
                 {/* User Info */}
                 <div className="space-y-1.5 w-full pr-0 sm:pr-24">
-                  <h2 className="text-lg sm:text-2xl font-bold text-slate-900 leading-tight">
+                  <h2 className="text-lg sm:text-2xl font-semibold text-slate-900 leading-tight">
                     {loading ? (
                       <span className="inline-block w-36 h-7 bg-slate-300/60 animate-pulse rounded-md" />
                     ) : (
@@ -429,14 +531,82 @@ export const ProfilePage = () => {
                       <label className="text-xs font-semibold text-slate-700 block">
                         Email Address
                       </label>
+                      <div className="relative flex items-center">
+                        <Input
+                          type="email"
+                          value={email}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                            if (isEmailVerified) setIsEmailVerified(false);
+                          }}
+                          placeholder="Write Your Email Address"
+                          disabled={!isEditing || updating}
+                          className="bg-white/90 border-slate-200 rounded-xl sm:rounded-2xl h-10 sm:h-11 pr-24 text-slate-900 font-medium text-xs sm:text-sm disabled:opacity-80 focus:ring-2 focus:ring-[var(--blue-normal)] shadow-2xs"
+                        />
+
+                        <div className="absolute right-2 flex items-center">
+                          {isEmailVerified ? (
+                            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1 shadow-2xs">
+                              <span>Verified</span>
+                              <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                            </span>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={handleInitiateEmailVerify}
+                              disabled={sendingOtp || !email}
+                              className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-rose-50 text-rose-600 hover:bg-rose-100 border border-rose-200 transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-1 shadow-2xs"
+                            >
+                              {sendingOtp ? (
+                                <>
+                                  <Loader2 className="w-3 h-3 animate-spin" />
+                                  <span>Sending...</span>
+                                </>
+                              ) : (
+                                <span>Verify</span>
+                              )}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Address Field (Optional) */}
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-700 block">
+                        Address
+                      </label>
                       <Input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Write Your Email Address"
+                        type="text"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        placeholder="Write Your Address"
                         disabled={!isEditing || updating}
                         className="bg-white/90 border-slate-200 rounded-xl sm:rounded-2xl h-10 sm:h-11 text-slate-900 font-medium text-xs sm:text-sm disabled:opacity-80 focus:ring-2 focus:ring-[var(--blue-normal)]"
                       />
+                    </div>
+
+                    {/* State Dropdown (Optional, IndianState Enum) */}
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-700 block">
+                        State
+                      </label>
+                      <div className="relative">
+                        <select
+                          value={stateName}
+                          onChange={(e) => setStateName(e.target.value)}
+                          disabled={!isEditing || updating}
+                          className="w-full appearance-none bg-white/90 border border-slate-200 rounded-xl sm:rounded-2xl h-10 sm:h-11 px-3.5 pr-8 text-slate-900 font-medium text-xs sm:text-sm disabled:opacity-80 focus:ring-2 focus:ring-[var(--blue-normal)] shadow-2xs outline-none cursor-pointer"
+                        >
+                          <option value="" className="text-slate-400">Select Your State</option>
+                          {INDIAN_STATES_LIST.map((st) => (
+                            <option key={st} value={st} className="text-slate-900">
+                              {st}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      </div>
                     </div>
 
                     {/* Mobile Number Group */}
@@ -547,6 +717,26 @@ export const ProfilePage = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Email Verification Modals */}
+      <EmailOtpVerificationModal
+        isOpen={showOtpModal}
+        onClose={() => setShowOtpModal(false)}
+        email={verifyingEmail || email}
+        onVerify={handleVerifyProfileOtp}
+        onResend={handleResendProfileOtp}
+        onEditEmail={() => {
+          setShowOtpModal(false);
+          setIsEditing(true);
+        }}
+      />
+
+      <EmailVerifiedSuccessModal
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        email={verifyingEmail || email}
+        ctaText="Done"
+      />
 
       {/* Footer Section */}
       <div className="relative z-10 w-full">

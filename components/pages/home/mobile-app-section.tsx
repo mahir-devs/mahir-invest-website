@@ -163,7 +163,7 @@ export const MobileAppSection: React.FC = () => {
               {/* Phone Left 2 (glides out fourth) */}
               <motion.div
                 variants={phoneLeft2Variant}
-                className="absolute bottom-2 sm:bottom-4 w-[80px] xs:w-[98px] sm:w-[150px] md:w-[175px] lg:w-[190px] z-[1]"
+                className="absolute bottom-2 sm:bottom-4 w-[80px] xs:w-[98px] sm:w-[150px] md:w-[175px] lg:w-[220px] z-[1]"
               >
                 <div className="relative w-full drop-shadow-2xl">
                   <Image
@@ -179,7 +179,7 @@ export const MobileAppSection: React.FC = () => {
               {/* Phone Left 1 (glides out second) */}
               <motion.div
                 variants={phoneLeft1Variant}
-                className="absolute bottom-1 sm:bottom-2 w-[95px] xs:w-[115px] sm:w-[175px] md:w-[205px] lg:w-[220px] z-[2]"
+                className="absolute bottom-1 sm:bottom-2 w-[95px] xs:w-[115px] sm:w-[175px] md:w-[205px] lg:w-[240px] z-[2]"
               >
                 <div className="relative w-full drop-shadow-2xl">
                   <Image
@@ -195,13 +195,13 @@ export const MobileAppSection: React.FC = () => {
               {/* Phone Center Anchor (glides up first) */}
               <motion.div
                 variants={centerPhoneVariant}
-                className="relative w-[115px] xs:w-[138px] sm:w-[210px] md:w-[240px] lg:w-[260px] z-[10] drop-shadow-[0_25px_35px_rgba(0,0,0,0.25)] shrink-0"
+                className="relative w-[115px] xs:w-[138px] sm:w-[210px] md:w-[240px] lg:w-[250px] z-[10] drop-shadow-[0_25px_35px_rgba(0,0,0,0.25)] shrink-0"
               >
                 <Image
                   src="/images/mobile_app/mobile_middle_mockup.png"
                   alt="MAHIR App Main Screen"
                   width={440}
-                  height={900}
+                  height={800}
                   priority
                   className="w-full h-auto object-contain"
                 />
@@ -210,7 +210,7 @@ export const MobileAppSection: React.FC = () => {
               {/* Phone Right 1 (glides out third) */}
               <motion.div
                 variants={phoneRight1Variant}
-                className="absolute bottom-1 sm:bottom-2 w-[95px] xs:w-[115px] sm:w-[175px] md:w-[205px] lg:w-[220px] z-[2]"
+                className="absolute bottom-1 sm:bottom-2 w-[95px] xs:w-[115px] sm:w-[175px] md:w-[205px] lg:w-[240px] z-[2]"
               >
                 <div className="relative w-full drop-shadow-2xl">
                   <Image
@@ -226,7 +226,7 @@ export const MobileAppSection: React.FC = () => {
               {/* Phone Right 2 (glides out fifth) */}
               <motion.div
                 variants={phoneRight2Variant}
-                className="absolute bottom-2 sm:bottom-4 w-[80px] xs:w-[98px] sm:w-[150px] md:w-[175px] lg:w-[190px] z-[1]"
+                className="absolute bottom-2 sm:bottom-4 w-[80px] xs:w-[98px] sm:w-[150px] md:w-[175px] lg:w-[220px] z-[1]"
               >
                 <div className="relative w-full drop-shadow-2xl">
                   <Image

@@ -73,7 +73,7 @@ export const WhyMahirSection: React.FC = () => {
 
         {/* Subtitle */}
         <MotionItem direction="up" distance={20} duration={0.5}>
-          <p className="text-sm sm:text-[24px] text-slate-500 font-normal leading-relaxed max-w-xl mx-auto">
+          <p className="text-sm sm:text-[22px] text-slate-500 font-normal leading-relaxed max-w-xl mx-auto">
             Everyone has Stock tips, <span className="font-syne font-[500]">MAHIR</span> has the{' '}
             <span className="font-semibold tracking-wider uppercase">RESEARCH</span>
           </p>

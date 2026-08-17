@@ -44,10 +44,9 @@ export const getProfileAPI = async () => {
 };
 
 export const updateProfileAPI = async (data: any) => {
+  const isFormData = typeof FormData !== 'undefined' && data instanceof FormData;
   const res = await api.patch("/users/update-user-profile", data, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
+    headers: isFormData ? { "Content-Type": "multipart/form-data" } : undefined,
   });
   return res.data;
 };
@@ -61,11 +60,33 @@ export const sendOtpAPI = async (email: string) => {
 
 export const verifyEmailOtpAPI = async (payload: {
   email: string;
-  code: number;
+  code: string | number;
 }) => {
   const res = await api.post(
-    "auth/verify-email-otp-for-update-profile",
+    "/auth/verify-email-otp-for-update-profile",
     payload
   );
+  return res.data;
+};
+
+export const sendEmailOtpForOnboardingAPI = async (payload: {
+  onboardingToken: string;
+  email: string;
+}) => {
+  const res = await api.post("/auth/send-email-otp-for-onboarding", payload);
+  return res.data;
+};
+
+export const verifyEmailOtpForOnboardingAPI = async (payload: {
+  onboardingToken: string;
+  email: string;
+  code: string | number;
+}) => {
+  const res = await api.post("/auth/verify-email-otp-for-onboarding", payload);
+  return res.data;
+};
+
+export const getEmailVerificationStatusAPI = async () => {
+  const res = await api.get("/auth/email-verification-status");
   return res.data;
 };

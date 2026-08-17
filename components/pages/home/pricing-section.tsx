@@ -17,6 +17,8 @@ import { Loader2 } from 'lucide-react';
 import { useSubscriptionStore } from '@/store/subscription.store';
 import { useAuthStore } from '@/store/auth.store';
 import { createUserSubscription } from '@/services/subscription.api';
+import { getEmailVerificationStatusAPI, sendOtpAPI, verifyEmailOtpAPI } from '@/services/auth.api';
+import { EmailOtpVerificationModal, EmailVerifiedSuccessModal, EmailInputModal } from '@/components/common/email-verification/email-verification-modals';
 import { cn } from '@/lib/utils';
 import { toast } from '@/components/ui/toast';
 import { SuspenseFallback } from '@/components/common/loading/suspense-fallback';
@@ -186,6 +188,41 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
   const [agreeRisk, setAgreeRisk] = useState(false);
   const [purchasing, setPurchasing] = useState(false);
 
+  // Email Verification Pre-check States
+  const [showInputModal, setShowInputModal] = useState(false);
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [targetEmail, setTargetEmail] = useState('');
+
+  const handlePaymentSubmitEmail = async (emailVal: string) => {
+    setTargetEmail(emailVal);
+    await sendOtpAPI(emailVal);
+    setShowInputModal(false);
+    setShowOtpModal(true);
+  };
+
+  const handlePaymentVerifyOtp = async (code: string) => {
+    await verifyEmailOtpAPI({ email: targetEmail, code });
+    await useAuthStore.getState().getProfile();
+    setShowOtpModal(false);
+    setShowSuccessModal(true);
+  };
+
+  const handlePaymentResendOtp = async () => {
+    if (!targetEmail) return;
+    await sendOtpAPI(targetEmail);
+  };
+
+  const handlePaymentSuccessDone = () => {
+    setShowSuccessModal(false);
+    setShowOtpModal(false);
+    setShowInputModal(false);
+    // Auto-resume payment checkout after email verification success with terms preserved
+    setTimeout(() => {
+      handleBuyPlan();
+    }, 100);
+  };
+
   const queryOpenSubscription = searchParams?.get('openSubscription');
   const queryOpenPlan =
     searchParams?.get('openPlan') ||
@@ -196,15 +233,6 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
   useEffect(() => {
     fetchPlans();
   }, [fetchPlans]);
-
-  // Reset checkboxes whenever modal opens
-  useEffect(() => {
-    if (selectedPlan) {
-      setAgreeTerms(false);
-      setAgreeRisk(false);
-      setPurchasing(false);
-    }
-  }, [selectedPlan]);
 
   // Extract raw variants from API store response
   const rawVariants: any[] = React.useMemo(() => {
@@ -313,6 +341,10 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
   }, [isOpen, autoOpenPlanId, displayPlans, queryOpenPlan, selectedPlan]);
 
   const handlePlanSelect = (plan: PricingPlan) => {
+    if (selectedPlan?.id !== plan.id) {
+      setAgreeTerms(false);
+      setAgreeRisk(false);
+    }
     setSelectedPlan(plan);
     if (onOpenChange) onOpenChange(true);
   };
@@ -343,13 +375,44 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
         description: 'Please accept both Terms & Privacy Policy and Market Risk notices to proceed.',
         type: 'warning',
       });
-      return; 
+      return;
     }
 
     if (!selectedPlan) return;
 
     try {
       setPurchasing(true);
+
+      // Mandatory Pre-check: Verify Email Status BEFORE calling payment API
+      let isVerified = false;
+      let currentEmail = '';
+
+      try {
+        const statusRes: any = await getEmailVerificationStatusAPI();
+        const dataObj = statusRes?.data || statusRes;
+        isVerified = Boolean(
+          dataObj?.isVerified ??
+          dataObj?.isEmailVerified ??
+          statusRes?.isVerified ??
+          statusRes?.isEmailVerified ??
+          user?.isEmailVerified ??
+          false
+        );
+        currentEmail = dataObj?.email || statusRes?.email || user?.email || '';
+      } catch (e) {
+        console.warn('Email verification status check warning:', e);
+        isVerified = Boolean(user?.isEmailVerified || user?.isVerified);
+        currentEmail = user?.email || '';
+      }
+
+      if (!isVerified) {
+        setTargetEmail(currentEmail);
+        setPurchasing(false);
+        // Whether email exists or not, always open EmailInputModal first
+        setShowInputModal(true);
+        return; // STOP! Do NOT execute payment API until email is verified!
+      }
+
       const targetVariantId = selectedPlan.variantId || selectedPlan.id;
 
       const response: any = await createUserSubscription({
@@ -540,10 +603,12 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
 
       {/* Plan Details & Checkout Dialog */}
       <Dialog
-        open={!!selectedPlan}
+        open={Boolean(selectedPlan) && !showInputModal && !showOtpModal && !showSuccessModal}
         onOpenChange={(open) => {
           if (!open) {
             setSelectedPlan(null);
+            setAgreeTerms(false);
+            setAgreeRisk(false);
             if (onOpenChange) onOpenChange(false);
           }
         }}
@@ -661,6 +726,36 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Email Verification Modals for Subscription Payment Pre-check */}
+      <EmailInputModal
+        isOpen={showInputModal}
+        onClose={() => setShowInputModal(false)}
+        initialEmail={targetEmail}
+        onSubmitEmail={handlePaymentSubmitEmail}
+      />
+
+      <EmailOtpVerificationModal
+        isOpen={showOtpModal}
+        onClose={() => setShowOtpModal(false)}
+        email={targetEmail}
+        onVerify={handlePaymentVerifyOtp}
+        onResend={handlePaymentResendOtp}
+        onEditEmail={() => {
+          setShowOtpModal(false);
+          setShowInputModal(true);
+        }}
+      />
+
+      <EmailVerifiedSuccessModal
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        email={targetEmail}
+        title="Email verified successfully"
+        subtitle="Your email has been verified. You can now proceed to payment."
+        ctaText="Proceed to Payment"
+        onCtaClick={handlePaymentSuccessDone}
+      />
     </section>
   );
 };
