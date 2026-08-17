@@ -158,12 +158,12 @@ export const MobileAppSection: React.FC = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-80px' }}
-              className="relative w-full max-w-4xl mx-auto h-[220px] xs:h-[280px] sm:h-[420px] md:h-[480px] lg:h-[540px] flex items-center justify-center pt-4 sm:pt-6 overflow-hidden"
+              className="relative w-full max-w-5xl mx-auto min-h-[250px] xs:min-h-[300px] sm:min-h-[460px] md:min-h-[520px] lg:min-h-[580px] flex items-center justify-center pt-6 sm:pt-10 pb-6 overflow-visible"
             >
               {/* Phone Left 2 (glides out fourth) */}
               <motion.div
                 variants={phoneLeft2Variant}
-                className="absolute bottom-3 sm:bottom-6 w-[80px] xs:w-[98px] sm:w-[165px] md:w-[190px] lg:w-[205px] z-[1]"
+                className="absolute bottom-2 sm:bottom-4 w-[80px] xs:w-[98px] sm:w-[150px] md:w-[175px] lg:w-[190px] z-[1]"
               >
                 <div className="relative w-full drop-shadow-2xl">
                   <Image
@@ -171,7 +171,7 @@ export const MobileAppSection: React.FC = () => {
                     alt="MAHIR App - Sector Insights"
                     width={410}
                     height={840}
-                    className="w-full h-auto"
+                    className="w-full h-auto object-contain"
                   />
                 </div>
               </motion.div>
@@ -179,7 +179,7 @@ export const MobileAppSection: React.FC = () => {
               {/* Phone Left 1 (glides out second) */}
               <motion.div
                 variants={phoneLeft1Variant}
-                className="absolute bottom-2 sm:bottom-4 w-[95px] xs:w-[115px] sm:w-[190px] md:w-[220px] lg:w-[235px] z-[2]"
+                className="absolute bottom-1 sm:bottom-2 w-[95px] xs:w-[115px] sm:w-[175px] md:w-[205px] lg:w-[220px] z-[2]"
               >
                 <div className="relative w-full drop-shadow-2xl">
                   <Image
@@ -187,7 +187,7 @@ export const MobileAppSection: React.FC = () => {
                     alt="MAHIR App - Screener Filters"
                     width={410}
                     height={840}
-                    className="w-full h-auto"
+                    className="w-full h-auto object-contain"
                   />
                 </div>
               </motion.div>
@@ -195,7 +195,7 @@ export const MobileAppSection: React.FC = () => {
               {/* Phone Center Anchor (glides up first) */}
               <motion.div
                 variants={centerPhoneVariant}
-                className="relative w-[115px] xs:w-[138px] sm:w-[225px] md:w-[255px] lg:w-[275px] z-[10] drop-shadow-[0_25px_35px_rgba(0,0,0,0.25)] shrink-0"
+                className="relative w-[115px] xs:w-[138px] sm:w-[210px] md:w-[240px] lg:w-[260px] z-[10] drop-shadow-[0_25px_35px_rgba(0,0,0,0.25)] shrink-0"
               >
                 <Image
                   src="/images/mobile_app/mobile_middle_mockup.png"
@@ -203,14 +203,14 @@ export const MobileAppSection: React.FC = () => {
                   width={440}
                   height={900}
                   priority
-                  className="w-full h-auto"
+                  className="w-full h-auto object-contain"
                 />
               </motion.div>
 
               {/* Phone Right 1 (glides out third) */}
               <motion.div
                 variants={phoneRight1Variant}
-                className="absolute bottom-2 sm:bottom-4 w-[95px] xs:w-[115px] sm:w-[190px] md:w-[220px] lg:w-[235px] z-[2]"
+                className="absolute bottom-1 sm:bottom-2 w-[95px] xs:w-[115px] sm:w-[175px] md:w-[205px] lg:w-[220px] z-[2]"
               >
                 <div className="relative w-full drop-shadow-2xl">
                   <Image
@@ -218,7 +218,7 @@ export const MobileAppSection: React.FC = () => {
                     alt="MAHIR App - Financial Dashboard"
                     width={410}
                     height={840}
-                    className="w-full h-auto"
+                    className="w-full h-auto object-contain"
                   />
                 </div>
               </motion.div>
@@ -226,7 +226,7 @@ export const MobileAppSection: React.FC = () => {
               {/* Phone Right 2 (glides out fifth) */}
               <motion.div
                 variants={phoneRight2Variant}
-                className="absolute bottom-3 sm:bottom-6 w-[80px] xs:w-[98px] sm:w-[165px] md:w-[190px] lg:w-[205px] z-[1]"
+                className="absolute bottom-2 sm:bottom-4 w-[80px] xs:w-[98px] sm:w-[150px] md:w-[175px] lg:w-[190px] z-[1]"
               >
                 <div className="relative w-full drop-shadow-2xl">
                   <Image
@@ -234,7 +234,7 @@ export const MobileAppSection: React.FC = () => {
                     alt="MAHIR App - Warren Buffett Insights"
                     width={410}
                     height={840}
-                    className="w-full h-auto"
+                    className="w-full h-auto object-contain"
                   />
                 </div>
               </motion.div>
