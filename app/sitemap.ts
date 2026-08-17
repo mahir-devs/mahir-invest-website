@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { BLOG_POSTS } from '@/lib/blogs';
 import { CALCULATOR_CONFIG } from '@/lib/calculators/config';
 
-const BASE_URL = 'https://www.mahiradvisers.com';
+const BASE_URL = 'https://www.mahirinvest.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();

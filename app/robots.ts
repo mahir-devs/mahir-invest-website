@@ -17,6 +17,6 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: 'https://www.mahiradvisers.com/sitemap.xml',
+    sitemap: 'https://www.mahirinvest.com/sitemap.xml',
   };
 }
