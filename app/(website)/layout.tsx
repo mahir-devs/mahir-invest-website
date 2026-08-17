@@ -29,6 +29,7 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
   return (
     <>
       <Navbar />
+      {/* <div className="fixed top-0 left-0 w-full h-40 bg-[var(--blue-normal)] z-0" ></div> */}
       <main className="flex-1">{children}</main>
     </>
   );

@@ -261,7 +261,7 @@ export const ExpensiveItemsSection: React.FC = () => {
         </div>
 
         {/* Bottom Mint Glass Pill Banner */}
-        <GlassCard padding="sm" variant="emerald" className="rounded-full max-w-6xl mx-auto">
+        <GlassCard padding="sm" variant="emerald" className="rounded-full max-w-6xl shadow-none mx-auto">
           <div>
             <p className="text-sm sm:text-base lg:text-[23px] text-[#0f8b4d] font-medium tracking-wide">
               You spend on these without thinking. Why not spend{' '}
