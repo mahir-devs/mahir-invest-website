@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { WhiteLogo } from '@/components/svg/logo';
 import { GlassCard } from '@/components/common/cards';
 import { MotionContainer, MotionItem } from '@/components/animations';
@@ -22,6 +23,10 @@ export const VerifyOtpPage = () => {
   const searchParams = useSearchParams();
   const phone = searchParams.get('phone');
   const redirectParam = searchParams.get('redirect');
+
+  const loginUrl = phone
+    ? `/login?phone=${encodeURIComponent(phone)}${redirectParam ? `&redirect=${encodeURIComponent(redirectParam)}` : ''}`
+    : `/login${redirectParam ? `?redirect=${encodeURIComponent(redirectParam)}` : ''}`;
 
   const [otpValue, setOtpValue] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);

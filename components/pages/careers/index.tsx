@@ -98,7 +98,7 @@ export const CareersPage = () => {
                 <div className="w-12 h-12 rounded-full bg-slate-100/90 border border-slate-200/80 flex items-center justify-center mx-auto mb-2 text-slate-700">
                   <Clock className="w-6 h-6 stroke-[1.75]" />
                 </div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 tracking-tight">
+                <h2 className="text-xl sm:text-2xl font-normal text-slate-900 tracking-tight">
                   We&apos;re not hiring right now
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500 font-normal leading-relaxed max-w-md mx-auto">

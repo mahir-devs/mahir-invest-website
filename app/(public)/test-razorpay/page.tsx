@@ -11,6 +11,8 @@ const DEFAULT_TEST_PHONE = "9084945150";
 const DEFAULT_TEST_OTP = "9876";
 const API_BASE = "https://api.mahiradvisers.com";
 
+// apis
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface Feature {
@@ -744,8 +746,8 @@ export default function TestRazorpayPage() {
       console.error("Payment Error:", err);
       message.error(
         err?.response?.data?.message ||
-          err?.message ||
-          "Payment Service Unavailable",
+        err?.message ||
+        "Payment Service Unavailable",
       );
     } finally {
       setPayingVariantId(null);

@@ -105,7 +105,7 @@ export const FeaturesSection: React.FC = () => {
                 rounded="2xl"
                 padding="none"
                 hoverable
-                className="bg-white/50 backdrop-blur-xl border border-[var(--blue-normal)]/30 shadow-md shadow-slate-900/5 text-center flex flex-col items-center justify-center p-3.5 sm:p-7 space-y-2 sm:space-y-3 transition-transform duration-300 hover:scale-[1.03] min-h-[150px] sm:min-h-[200px]"
+                className="bg-white/50 backdrop-blur-xl border border-[var(--blue-normal)]/30 shadow-md shadow-slate-900/5 text-center flex flex-col items-center justify-center p-3.5 sm:p-7 space-y-2 sm:space-y-3 transition-transform duration-300  min-h-[150px] sm:min-h-[200px]"
               >
                 {/* Icon Container */}
                 <div className="flex items-center justify-center h-8 sm:h-12">

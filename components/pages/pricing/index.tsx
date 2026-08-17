@@ -29,46 +29,45 @@ export const PricingPage = () => {
 
         {/* 2. Features Section (What changes when you have MAHIR) */}
         <FeaturesSection />
-    
+
         <SectionDivider />
 
         {/* 3. Expensive Items Section (Somethings that are more expensive than our plans) */}
         <ExpensiveItemsSection />
 
         {/* 4. Still Have Questions Contact CTA Card */}
-        {/* <section className="relative w-full pt-4 sm:pt-8 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 select-none z-10">
+        <section className="relative w-full pt-4 sm:pt-8 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 select-none z-10">
           <MotionContainer className="max-w-md mx-auto">
             <MotionItem direction="up" distance={25} duration={0.6}>
               <GlassCard
                 variant="light"
                 rounded="2xl"
                 padding="lg"
-                className="text-center space-y-4 shadow-xl border-white/40"
+                className="text-center space-y-4 border-[var(--blue-normal)]! border-1 shadow-xl border-white/40"
               >
-                <div className="space-y-1">
+                <div className="space-y-1 mb-8">
                   <h3 className="text-xl sm:text-2xl font-normal text-slate-900">
                     Still Have Questions?
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 font-normal">
+                  <p className="text-xs sm:text-[12px] text-slate-600 font-normal">
                     We&apos;re here to help you choose the right plan for your journey.
                   </p>
                 </div>
 
                 <div className="pt-2">
                   <a href="/who-we-are#contact-us" className="inline-block w-full sm:w-auto">
-                    <GlassButton
-                      variant="cyan"
-                      size="md"
-                      className="w-full sm:w-auto px-8 py-3 rounded-full text-white font-medium"
+                    <button
+
+                      className="w-full text-black! rounded-full! cursor-pointer! border-[var(--blue-normal)]! border-1 font-medium sm:w-auto px-8 py-3 rounded-full text-white font-medium"
                     >
-                      Contact Support
-                    </GlassButton>
+                      Talk to Us
+                    </button>
                   </a>
                 </div>
               </GlassCard>
             </MotionItem>
           </MotionContainer>
-        </section> */}
+        </section>
 
         <Footer />
       </div>

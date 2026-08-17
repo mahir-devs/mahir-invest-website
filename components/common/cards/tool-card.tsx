@@ -44,7 +44,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
         </div>
 
         {/* Title */}
-        <h3 className="text-base sm:text-lg font-semibold text-slate-900 leading-snug tracking-tight">
+        <h3 className="text-base sm:text-lg font-normal text-slate-900 leading-snug tracking-tight">
           {title}
         </h3>
 

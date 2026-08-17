@@ -28,7 +28,7 @@ export const ContactSupportDialog: React.FC<ContactSupportDialogProps> = ({
           <OnlyLogo size={22} />
         </div>
 
-        <DialogTitle className="text-2xl sm:text-[28px] font-semibold text-slate-900 tracking-tight">
+        <DialogTitle className="text-2xl sm:text-[28px] font-normal text-slate-900 tracking-tight">
           Contact Support
         </DialogTitle>
 

@@ -94,7 +94,7 @@ export const FaqSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => toggleFaq(faq.id)}
-                  className="w-full px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between gap-4 text-left outline-none cursor-pointer"
+                  className="w-full px-6 sm:px-8 py-5 sm:py-4  flex items-center justify-between gap-2 text-left outline-none cursor-pointer"
                 >
                   <span className="text-sm sm:text-base lg:text-[16px] font-medium text-slate-800">
                     {faq.question}
@@ -120,7 +120,7 @@ export const FaqSection: React.FC = () => {
                       className="overflow-hidden"
                     >
                       {/* Inset border line to match text padding alignment */}
-                      <div className="mx-6 sm:mx-8 border-t border-slate-300/40" />
+                      <div className="mx-6 sm:mx-8 " />
 
                       {/* Answer content with balanced top and bottom padding */}
                       <div className="px-6 sm:px-8 pt-4 pb-6 sm:pb-7">

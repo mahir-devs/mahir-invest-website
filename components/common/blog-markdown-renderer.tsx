@@ -37,7 +37,7 @@ export const BlogMarkdownRenderer: React.FC<BlogMarkdownRendererProps> = ({ cont
           const headingText = block.replace(/^##\s+/, '');
           return (
             <div key={blockIndex} className="pt-4 pb-1 border-b border-slate-200/80">
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-normal text-slate-900 tracking-tight">
                 {headingText}
               </h2>
             </div>

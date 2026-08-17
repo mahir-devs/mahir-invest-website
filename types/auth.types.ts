@@ -23,6 +23,9 @@ export interface RegisterPayload {
   firstName: string;
   lastName: string;
   consentGiven: boolean;
+  fullAddress?: string;
+  state?: string;
+  email?: string;
 }
 
 export interface AuthResponse {

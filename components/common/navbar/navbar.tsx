@@ -178,7 +178,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     >
       <div
         className={cn(
-          'mx-auto flex items-center justify-between rounded-full border transition-all duration-300 ease-in-out',
+          'relative mx-auto flex items-center justify-between rounded-full border transition-all duration-300 ease-in-out',
           isFloating
             ? 'max-w-7xl bg-white/30 backdrop-blur-2xl border-white/50 shadow-lg shadow-slate-900/10 px-3 sm:px-3 py-2.5 sm:py-3 h-14 sm:h-16'
             : 'max-w-7xl px-4 sm:px-3 lg:px-3 h-20 border-transparent shadow-none bg-transparent'
@@ -190,13 +190,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             <WhiteLogo
               width={isFloating ? 135 : 147}
               height={isFloating ? 38 : 42}
-              color={isFloating ? '#0f172a' : 'white'}
+              color={isFloating ? '#1E3160' : 'white'}
             />
           </a>
         </div>
 
         {/* Center: Navigation Links (Desktop) */}
-        <ul className="hidden md:flex items-center space-x-2 text-sm font-medium transition-colors duration-300">
+        <ul className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center space-x-2 text-sm font-medium transition-colors duration-300">
           {navItems.map((item) => {
             const isActive = isItemActive(item);
 
@@ -278,9 +278,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 type="button"
                 onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
                 className={cn(
-                  'relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0 flex items-center justify-center font-bold text-xs sm:text-sm border-2 transition-all duration-200 cursor-pointer shadow-md outline-none hover:scale-105 active:scale-95',
+                  'relative w-8 h-8 sm:w-8 sm:h-8 rounded-full overflow-hidden shrink-0 flex items-center justify-center font-semibold text-xs sm:text-sm border-[1px] transition-all duration-200 cursor-pointer shadow-md outline-none hover:scale-105 active:scale-95',
                   isFloating
-                    ? 'bg-gradient-to-tr from-sky-500 via-sky-600 to-blue-600 text-white border-white shadow-sky-900/20'
+                    ? 'bg-gradient-to-tr from[var(--primary-normal)] via[var(--primary-dark)] to-[var(--blue-normal)] text-white border-white shadow-sky-900/20'
                     : 'bg-white text-sky-600 border-white/90 shadow-lg shadow-black/10'
                 )}
                 aria-expanded={profileDropdownOpen}
@@ -304,7 +304,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <div className="absolute right-0 top-full mt-2 w-60 rounded-2xl bg-white text-slate-900 shadow-2xl border border-slate-100 p-2 z-50 animate-in fade-in-50 zoom-in-95 duration-150 select-none">
                   {/* User Info Header */}
                   <div className="px-3 py-2.5 bg-slate-50/80 rounded-xl mb-1 flex items-center gap-3">
-                    <div className="relative w-9 h-9 rounded-full overflow-hidden shrink-0 flex items-center justify-center bg-gradient-to-tr from-sky-500 to-blue-600 text-white font-bold text-xs border border-white/80 shadow-sm">
+                    <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0 flex items-center justify-center bg-gradient-to-tr from-[var(--primary-normal)]  to-[var(--blue-normal)] text-white font-semibold text-xs border border-[var(--blue-normal)]/50 shadow-sm">
                       {avatarSrc && !imgError ? (
                         <Image
                           src={avatarSrc}
@@ -346,7 +346,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         logout();
                         window.location.href = '/';
                       }}
-                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs sm:text-sm font-medium rounded-xl text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer text-left"
+                      className="w-full flex items-center gap-2.5 px-3 py-2 text-xs sm:text-sm font-medium rounded-xl  transition-colors cursor-pointer text-left"
                     >
                       <LogOut className="w-4 h-4 stroke-[2]" />
                       <span>Logout</span>
@@ -506,7 +506,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       logout();
                       window.location.href = '/';
                     }}
-                    className="flex items-center justify-center gap-2 py-2.5 rounded-full text-sm font-medium bg-rose-600 text-white hover:bg-rose-700 transition-colors cursor-pointer"
+                    className="flex items-center justify-center gap-2 py-2.5 rounded-full text-sm font-medium  text-black border-1 border-gray-300 transition-colors cursor-pointer"
                   >
                     <LogOut className="w-4 h-4" />
                     <span>Logout</span>
