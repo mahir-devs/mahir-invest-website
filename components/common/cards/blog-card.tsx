@@ -79,7 +79,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({
 
         {/* Footer Row (Author, Date, Read time) */}
         <div className="flex items-center justify-between pt-2 border-t border-slate-200/50 text-xs sm:text-[13px]">
-          <span className="font-bold text-slate-900">{author}</span>
+          <span className="font-bold text-slate-900"></span>
           <div className="flex items-center gap-2 text-slate-500">
             <span className="font-medium">{date}</span>
             {readTime && (
