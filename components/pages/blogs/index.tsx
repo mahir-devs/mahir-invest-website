@@ -64,21 +64,20 @@ export const BlogsPage = () => {
           {/* Header Title */}
           <div className="space-y-3 mb-20 max-w-3xl mx-auto">
             <MotionItem direction="down" duration={0.5}>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest text-sky-200 bg-white/10 backdrop-blur-md border border-white/15">
-                <Sparkles className="w-3.5 h-3.5" />
-                RESOURCES &amp; INSIGHTS
+              <span className="inline-flex items-center text-white/60 gap-1.5 px-3 py-1 rounded-full text-xs font-normal uppercase tracking-widest ">
+                RESOURCES
               </span>
             </MotionItem>
 
             <MotionItem direction="scaleDown" scale={1.15} duration={0.6}>
               <h1 className="text-4xl sm:text-6xl lg:text-[68px] font-normal text-white tracking-tight leading-tight drop-shadow-sm">
-                Blogs &amp; Financial Guides
+                Blogs &amp; Insights
               </h1>
             </MotionItem>
 
             <MotionItem direction="up" distance={15} duration={0.5}>
-              <p className="text-xs sm:text-base lg:text-[17px] text-white/90 font-normal leading-relaxed max-w-2xl mx-auto">
-                Explore {BLOG_POSTS.length} comprehensive guides, research breakdowns, tax tips, and beginner investment strategies powered by MAHIR Research.
+              <p className="text-xs sm:text-base lg:text-[16px] text-white/60 font-normal leading-relaxed max-w-2xl mx-auto">
+                Educational insights and research-backed advisory content.
               </p>
             </MotionItem>
           </div>

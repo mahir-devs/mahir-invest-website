@@ -90,7 +90,7 @@ export const LoginPage = () => {
           {/* Heading & Subtitle */}
           <div className="space-y-2">
             <h1 className="text-2xl sm:text-[34px] font-normal text-slate-900 tracking-tight">
-              Welcome to MAHIR
+              Welcome to <span className='font-syne'>MAHIR</span>
             </h1>
             <p className="text-xs sm:text-[15.01px] text-slate-700 font-[400] leading-relaxed max-w-xs mx-auto">
               Login to access your account to manage your dashboard.
