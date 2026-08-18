@@ -51,7 +51,7 @@ export const NewsPage = () => {
 
           {/* Featured Horizontal Card (Hero Article Box) */}
           <MotionItem direction="up" distance={30} duration={0.65} className="w-full max-w-5xl mx-auto">
-            <Link href={`/blogs/${featuredPost.id}`} className="block group">
+            <Link href={`/blogs/${featuredPost.slug || featuredPost.id}`} className="block group">
               <GlassCard
                 variant="frosted"
                 rounded="3xl"
@@ -143,7 +143,7 @@ export const NewsPage = () => {
                     readTime={blog.readTime}
                     wordCount={blog.wordCount}
                     priority={index < 3}
-                    href={`/blogs/${blog.id}`}
+                    href={`/blogs/${blog.slug || blog.id}`}
                   />
                 </MotionItem>
               ))}

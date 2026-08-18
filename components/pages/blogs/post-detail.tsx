@@ -8,22 +8,25 @@ import { GlassCard } from '@/components/common/cards';
 import { SectionDivider } from '@/components/common/section-divider';
 import { MotionContainer, MotionItem } from '@/components/animations';
 import { ArrowLeft, BookOpen, Clock, Calendar, User } from 'lucide-react';
-import { getBlogById, BLOG_POSTS } from '@/lib/blogs';
+import { getBlogById, getBlogBySlug, BLOG_POSTS } from '@/lib/blogs';
 import { BLOG_DEFAULT_IMAGE } from '@/lib/assets';
 import { BlogMarkdownRenderer } from '@/components/common/blog-markdown-renderer';
 
 export interface BlogPostDetailPageProps {
   id?: string;
+  slug?: string;
   backLinkHref?: string;
   backLinkLabel?: string;
 }
 
 export const BlogPostDetailPage: React.FC<BlogPostDetailPageProps> = ({
   id,
+  slug,
   backLinkHref = '/blogs',
   backLinkLabel = 'Back to Blogs & Guides',
 }) => {
-  const post = getBlogById(id || '1') || BLOG_POSTS[0];
+  const identifier = slug || id || '1';
+  const post = getBlogBySlug(identifier) || getBlogById(identifier) || BLOG_POSTS[0];
   const heroImage = post.imageSrc || BLOG_DEFAULT_IMAGE;
 
   return (
@@ -95,7 +98,7 @@ export const BlogPostDetailPage: React.FC<BlogPostDetailPageProps> = ({
               className="bg-white border border-white/90 shadow-2xl p-6 sm:p-12 lg:p-14 rounded-[32px] sm:rounded-[40px] text-left space-y-8"
             >
               {/* Data-driven dynamic image banner card or static photo image */}
-              <div className="relative w-full rounded-[24px] overflow-hidden shadow-lg border border-slate-200/50">
+              {/* <div className="relative w-full rounded-[24px] overflow-hidden shadow-lg border border-slate-200/50">
                 <div className="relative w-full h-64 sm:h-[360px] lg:h-[400px]">
                   <Image
                     src={heroImage}
@@ -106,7 +109,7 @@ export const BlogPostDetailPage: React.FC<BlogPostDetailPageProps> = ({
                     sizes="(max-width: 1024px) 100vw, 900px"
                   />
                 </div>
-              </div>
+              </div> */}
 
               {/* Dynamic Markdown Article Content */}
               <div className="pt-2">

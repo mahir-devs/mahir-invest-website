@@ -46,12 +46,12 @@ export const BlogCard: React.FC<BlogCardProps> = ({
       hoverable
       onClick={onClick}
       className={cn(
-        ' border border-white/80 shadow-md flex flex-col justify-between p-3.5 sm:p-4 rounded-[28px] sm:rounded-[32px] overflow-hidden transition-transform duration-300 hover:scale-[1.02] h-full cursor-pointer select-none',
+        ' border border-white/80 bg-white/30 shadow-md flex flex-col justify-between p-3.5 sm:p-4 rounded-[28px] sm:rounded-[32px] overflow-hidden transition-transform duration-300 hover:scale-[1.02] h-full cursor-pointer select-none',
         className
       )}
     >
       {/* Top Image Thumbnail / Dynamic Data Graphic Box */}
-      <div className="relative w-full h-[180px] xs:h-[200px] sm:h-[220px] rounded-[22px] overflow-hidden mb-3.5 group shrink-0">
+      {/* <div className="relative w-full h-[180px] xs:h-[200px] sm:h-[220px] rounded-[22px] overflow-hidden mb-3.5 group shrink-0">
         <Image
           src={resolvedImageSrc}
           alt={cardTitle}
@@ -66,8 +66,15 @@ export const BlogCard: React.FC<BlogCardProps> = ({
             {cardTitle}
           </p>
         </div>
-      </div>
+      </div> */}
 
+      <div>
+        <div className=" z-10   py-3.5 px-1  sm:py-4">
+          <p className="text-white text-black! font-medium text-xs sm:text-sm leading-snug line-clamp-2">
+            {cardTitle}
+          </p>
+        </div>
+      </div>
       {/* Card Body Content */}
       <div className="flex-1 flex flex-col justify-between space-y-3 px-1.5 pb-1 text-left">
         <span className="inline-flex w-fit px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-medium bg-sky-50 text-sky-700 border border-sky-100">

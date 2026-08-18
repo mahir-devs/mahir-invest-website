@@ -30,6 +30,7 @@ export interface NavbarProps {
   className?: string;
   /** Scroll position threshold in pixels to trigger morphing (default 20px) */
   scrollThreshold?: number;
+
 }
 
 const DEFAULT_NAV_ITEMS: NavItem[] = [
