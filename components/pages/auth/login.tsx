@@ -98,7 +98,7 @@ export const LoginPage = () => {
           </div>
 
           {/* Login Form with React Hook Form & Zod Validation */}
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-left pt-2" noValidate>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 text-left " noValidate>
             {/* Mobile No Input */}
             <div className="space-y-1.5">
               <label htmlFor="mobileNumber" className="text-[17.01px] font-normal text-slate-700 block">
@@ -126,7 +126,7 @@ export const LoginPage = () => {
             </div>
 
             {/* Terms & Privacy Shadcn Checkbox */}
-            <div className="flex items-center gap-2.5 pt-1">
+            <div className="flex items-center gap-2  ">
               <Controller
                 name="agreed"
                 control={control}
@@ -167,14 +167,14 @@ export const LoginPage = () => {
               type="submit"
               disabled={isSubmitting}
               variant="outline"
-              className="w-full h-auto py-3.5 rounded-full border border-[var(--blue-normal)] text-[var(--blue-normal)] font-medium bg-white hover:bg-sky-50 shadow-sm transition-colors text-sm sm:text-base cursor-pointer disabled:opacity-50 mt-2"
+              className="w-full h-auto py-3.5 !mt-6 rounded-full border border-[var(--blue-normal)] text-[var(--blue-normal)] font-medium bg-white hover:bg-sky-50 shadow-sm transition-colors text-sm sm:text-base cursor-pointer disabled:opacity-50 mt-2"
             >
               {isSubmitting ? 'Sending...' : 'Send OTP'}
             </Button>
           </form>
 
           {/* Disclaimer Text */}
-          <p className="text-[11px] text-slate-400 font-normal pt-2">
+          <p className="text-[11px] -mt-4 text-slate-400 font-normal ">
             Investments are subject to market risk
           </p>
         </GlassCard>
