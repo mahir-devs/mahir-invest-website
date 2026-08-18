@@ -17,7 +17,7 @@ export const PricingPage = () => {
   return (
     <div className="relative w-full min-h-screen overflow-hidden select-none">
       {/* Top Hero Blue Gradient & Cloud Background Container */}
-      <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-14 sm:pt-12 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden select-none">
+      <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-34 sm:pt-38 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden select-none">
         <CloudAnimation height={70} opacity={1} speed={26} />
 
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-white/10 blur-[120px] rounded-full pointer-events-none" />

@@ -28,7 +28,7 @@ const CALCULATOR_COMPONENTS: Record<string, React.FC> = {
 
 const CalculatorNotFound: React.FC = () => (
   <div className="relative w-full min-h-screen overflow-hidden select-none">
-    <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-24 sm:pt-32 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-34 sm:pt-38 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <CloudAnimation height={90} opacity={1} speed={26} />
       <MotionContainer className="relative max-w-2xl mx-auto text-center z-10 space-y-8">
         <MotionItem direction="down" duration={0.5}>
