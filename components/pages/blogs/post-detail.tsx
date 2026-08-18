@@ -42,31 +42,20 @@ export const BlogPostDetailPage: React.FC<BlogPostDetailPageProps> = ({
           delay={0.1}
           className="relative max-w-4xl mx-auto text-center z-10 space-y-8 sm:space-y-12"
         >
-          {/* Back Navigation Button */}
-          {/* <MotionItem direction="down" duration={0.4}>
-            <div className="flex justify-center">
-              <a
-                href={backLinkHref}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md text-white text-xs sm:text-sm font-medium transition-all shadow-md"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>{backLinkLabel}</span>
-              </a>
-            </div>
-          </MotionItem> */}
+
 
           {/* Article Category Pill & Metadata */}
           <MotionItem direction="up" distance={15} duration={0.5} className="space-y-3">
-            <span className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest bg-white/15 border border-white/20 text-sky-200 backdrop-blur-md">
+            {/* <span className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest bg-white/15 border border-white/20 text-sky-200 backdrop-blur-md">
               {post.category}
-            </span>
+            </span> */}
 
             <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-normal text-white tracking-tight leading-snug max-w-3xl mx-auto drop-shadow-sm">
               {post.title}
             </h1>
 
             {/* Author / Date / Reading Time metadata bar */}
-            <div className="flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-white/80 font-medium pt-2">
+            {/* <div className="flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-white/80 font-medium pt-2">
               <span className="flex items-center gap-1.5">
                 <User className="w-4 h-4 text-sky-300" />
                 {post.author}
@@ -86,11 +75,22 @@ export const BlogPostDetailPage: React.FC<BlogPostDetailPageProps> = ({
                 <BookOpen className="w-4 h-4 text-sky-300" />
                 {post.wordCount} words
               </span>
-            </div>
+            </div> */}
           </MotionItem>
+
 
           {/* Main Article Glass Card Container */}
           <MotionItem direction="up" distance={30} duration={0.65} className="w-full">
+            {/* Back Navigation Button (Top Left) */}
+            <MotionItem direction="down" duration={0.4} className="flex mb-4 justify-start text-left">
+              <a
+                href={backLinkHref}
+                className="inline-flex items-center gap-2.5 text-white/90 hover:text-white text-sm sm:text-base font-normal transition-opacity hover:opacity-100 group"
+              >
+                <ArrowLeft className="w-4 sm:w-5 h-4 sm:h-5 transition-transform group-hover:-translate-x-1" />
+                <span>{backLinkLabel}</span>
+              </a>
+            </MotionItem>
             <GlassCard
               variant="dark"
               rounded="3xl"

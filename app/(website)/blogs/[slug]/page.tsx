@@ -45,7 +45,7 @@ export default async function BlogDetailRoute({
     <BlogPostDetailPage
       slug={slug}
       backLinkHref="/blogs"
-      backLinkLabel="Back to Blogs & Guides"
+      backLinkLabel="Back to Blogs & Insights"
     />
   );
 }
