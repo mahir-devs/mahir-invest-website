@@ -1,15 +1,22 @@
 import React from 'react';
 import BlogPostDetailPage from '@/components/pages/blogs/post-detail';
 import { Metadata } from 'next';
-import { getBlogById } from '@/lib/blogs';
+import { notFound } from 'next/navigation';
+import { getBlogBySlug, BLOG_POSTS } from '@/lib/blogs';
+
+export async function generateStaticParams() {
+  return BLOG_POSTS.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { id } = await params;
-  const post = getBlogById(id);
+  const { slug } = await params;
+  const post = getBlogBySlug(slug);
   if (!post) {
     return {
       title: 'Blog Post - MAHIR Invest',
@@ -25,12 +32,18 @@ export async function generateMetadata({
 export default async function BlogDetailRoute({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { id } = await params;
+  const { slug } = await params;
+  const post = getBlogBySlug(slug);
+
+  if (!post) {
+    notFound();
+  }
+
   return (
     <BlogPostDetailPage
-      id={id}
+      slug={slug}
       backLinkHref="/blogs"
       backLinkLabel="Back to Blogs & Guides"
     />

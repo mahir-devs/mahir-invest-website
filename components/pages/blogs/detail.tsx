@@ -140,7 +140,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ id }) => {
                     readTime={blog.readTime}
                     wordCount={blog.wordCount}
                     priority={index < 3}
-                    href={`/blogs/${blog.id}`}
+                    href={`/blogs/${blog.slug}`}
                   />
                 </MotionItem>
               ))}

@@ -83,7 +83,14 @@ export function getBlogById(id: string | number): BlogPost | undefined {
 }
 
 export function getBlogBySlug(slug: string): BlogPost | undefined {
-  return BLOG_POSTS.find((post) => post.slug === slug || post.id === slug);
+  if (!slug) return undefined;
+  const normalized = decodeURIComponent(String(slug)).trim().toLowerCase();
+  return BLOG_POSTS.find(
+    (post) =>
+      post.slug.toLowerCase() === normalized ||
+      post.id === normalized ||
+      String(post.numericId) === normalized
+  );
 }
 
 export function getCategories(): string[] {
@@ -94,13 +101,13 @@ export function getCategories(): string[] {
 export function getRelatedBlogs(currentId: string, category?: string, count: number = 3): BlogPost[] {
   const currentStrId = String(currentId);
   const filtered = BLOG_POSTS.filter((post) => post.id !== currentStrId && String(post.numericId) !== currentStrId);
-  
+
   if (category && category !== 'All') {
     const sameCat = filtered.filter((post) => post.category === category);
     if (sameCat.length >= count) return sameCat.slice(0, count);
     const remaining = filtered.filter((post) => post.category !== category);
     return [...sameCat, ...remaining].slice(0, count);
   }
-  
+
   return filtered.slice(0, count);
 }

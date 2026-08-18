@@ -108,7 +108,7 @@ export const BlogsPage = () => {
                     readTime={blog.readTime}
                     wordCount={blog.wordCount}
                     priority={index < 3}
-                    href={`/blogs/${blog.id}`}
+                    href={`/blogs/${blog.slug}`}
                   />
                 </MotionItem>
               ))}
