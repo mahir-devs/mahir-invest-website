@@ -52,7 +52,7 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({
-  variant = 'auto',
+  variant = 'floating',
   navItems = DEFAULT_NAV_ITEMS,
   activeItem,
   onTalkToUsClick,
@@ -84,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   useEffect(() => {
-    if (variant !== 'auto' && variant !== 'scroll') return;
+    if (variant !== 'scroll') return;
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > scrollThreshold);
@@ -109,7 +109,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   const isFloating =
     variant === 'floating' ||
     variant === 'light' ||
-    ((variant === 'auto' || variant === 'scroll') && isScrolled);
+    variant === 'auto' ||
+    ((variant === 'scroll') && isScrolled);
 
   const isItemActive = (item: NavItem) => {
     if (activeItem) {
@@ -171,7 +172,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 w-full select-none transition-all duration-300 ease-in-out',
+        'fixed top-0 left-0 right-0 z-50 w-full select-none transition-all duration-300 ease-in-out',
         isFloating ? 'pt-3 px-4 sm:px-6 bg-transparent' : 'pt-0 px-0 bg-[var(--blue-normal)]',
         className
       )}

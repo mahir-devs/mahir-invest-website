@@ -350,7 +350,7 @@ export const ProfilePage = () => {
   return (
     <div className="relative w-full min-h-screen overflow-hidden select-none">
       {/* Single Top Sky Blue Gradient Background Container */}
-      <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-20 sm:pt-32 pb-16 sm:pb-28 px-3 sm:px-6 lg:px-8 overflow-hidden select-none">
+      <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-34 sm:pt-38 pb-16 sm:pb-28 px-3 sm:px-6 lg:px-8 overflow-hidden select-none">
         <CloudAnimation height={90} opacity={1} speed={26} />
 
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-white/10 blur-[130px] rounded-full pointer-events-none" />

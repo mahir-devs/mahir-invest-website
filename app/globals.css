@@ -358,39 +358,39 @@
 /* GlassButton icon glow — circular orbit animation */
 @keyframes icon-glow-orbit-shadow {
   0% {
-    box-shadow: 7px 0 16px rgba(0, 179, 40, 0.9);
+    box-shadow: 3px 0 7px rgb(0, 179, 39);
   }
 
   12.5% {
-    box-shadow: 5px 5px 16px rgba(0, 179, 40, 0.9);
+    box-shadow: 2px 2px 7px rgb(0, 179, 39);
   }
 
   25% {
-    box-shadow: 0 7px 16px rgba(0, 179, 40, 0.9);
+    box-shadow: 0 3px 7px rgb(0, 179, 39);
   }
 
   37.5% {
-    box-shadow: -5px 5px 16px rgba(0, 179, 40, 0.9);
+    box-shadow: -2px 2px 7px rgb(0, 179, 39);
   }
 
   50% {
-    box-shadow: -7px 0 16px rgba(0, 179, 40, 0.9);
+    box-shadow: -3px 0 7px rgb(0, 179, 39);
   }
 
   62.5% {
-    box-shadow: -5px -5px 16px rgba(0, 179, 40, 0.9);
+    box-shadow: -2px -2px 7px rgb(0, 179, 39);
   }
 
   75% {
-    box-shadow: 0 -7px 16px rgba(0, 179, 40, 0.9);
+    box-shadow: 0 -3px 7px rgb(0, 179, 39);
   }
 
   87.5% {
-    box-shadow: 5px -5px 16px rgba(0, 179, 40, 0.9);
+    box-shadow: 2px -2px 7px rgb(0, 179, 39);
   }
 
   100% {
-    box-shadow: 7px 0 16px rgba(0, 179, 40, 0.9);
+    box-shadow: 3px 0 7px rgb(0, 179, 39);
   }
 }
 

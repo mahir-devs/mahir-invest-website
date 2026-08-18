@@ -105,7 +105,7 @@ export const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>
           iconBgColor,
           iconTextColor,
           isGlowIcon &&
-            (iconGlowClassName || 'animate-icon-glow-orbit shadow-[5px_0_14px_rgba(0,179,40,0.75)]'),
+          (iconGlowClassName || 'animate-icon-glow-orbit shadow-[3px_0_7px_rgba(0,179,40,0.85)]'),
           !isGlowIcon && 'shadow-sm',
           iconClassName
         )}

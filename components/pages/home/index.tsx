@@ -13,7 +13,7 @@ import { SectionDivider } from '@/components/common/section-divider';
 
 const HomePage = () => {
   return (
-    <div className="relative w-full">
+    <div className="relative  w-full">
       <div className="relative z-10 w-full">
         <HeroSection />
         <SectionDivider />

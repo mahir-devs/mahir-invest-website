@@ -51,8 +51,8 @@ export const BlogsPage = () => {
   return (
     <div className="relative w-full min-h-screen overflow-hidden select-none">
       {/* Top Hero Blue Gradient Header Section with Cloud Animation */}
-      <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-24 sm:pt-32 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden select-none">
-        <CloudAnimation height={90} opacity={1} speed={26} />
+      <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-34 sm:pt-38 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden select-none">
+        {/* <CloudAnimation height={50} opacity={1} speed={26} /> */}
 
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-white/10 blur-[130px] rounded-full pointer-events-none" />
 
@@ -138,7 +138,7 @@ export const BlogsPage = () => {
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-sm shadow-xl transition-all hover:scale-105 cursor-pointer"
               >
                 Load More
-                
+
               </button>
             </div>
           )}
