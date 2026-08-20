@@ -46,7 +46,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({
       hoverable
       onClick={onClick}
       className={cn(
-        ' border border-[var(--blue-normal)] bg-white/30 shadow-md flex flex-col justify-between p-3.5 sm:p-4 rounded-[28px] sm:rounded-[32px] overflow-hidden transition-transform duration-300 hover:scale-[1.02] h-full cursor-pointer select-none',
+        ' border border-[var(--blue-normal)] bg-white/100 shadow-md flex flex-col justify-between p-3.5 sm:p-4 rounded-[28px] sm:rounded-[32px] overflow-hidden transition-transform duration-300 hover:scale-[1.02] h-full cursor-pointer select-none',
         className
       )}
     >
