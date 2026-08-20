@@ -21,7 +21,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "MAHIR Invest",
+  title: "MAHIR Invest: Stocks, MF & ETF",
   description: "MAHIR Investment Advisers - Personalized Wealth & Investment Guidance",
 };
 

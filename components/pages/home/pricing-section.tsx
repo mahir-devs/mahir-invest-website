@@ -168,6 +168,10 @@ export interface PricingSectionProps {
   onOpenChange?: (open: boolean) => void;
   autoOpenPlanId?: string;
   isHeadingDark?: boolean;
+  eyebrowText?: string;
+  title?: string;
+  subtitle?: string;
+  hideSubtitle?: boolean;
 }
 
 const PricingSectionInner: React.FC<PricingSectionProps> = ({
@@ -176,6 +180,10 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
   onOpenChange,
   autoOpenPlanId,
   isHeadingDark = false,
+  eyebrowText,
+  title,
+  subtitle,
+  hideSubtitle = false,
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -507,22 +515,38 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
       <MotionContainer staggerDelay={0.15} delay={0.1} className="relative max-w-7xl mx-auto z-10 space-y-12">
         {/* Header Title & Subtitle */}
         <div className="space-y-3 text-center max-w-3xl mx-auto">
-          <MotionItem direction="scaleDown" scale={1.1} duration={0.6}>
-            <h2 className={cn("text-3xl sm:text-5xl font-normal tracking-tight leading-tight", isHeadingDark ? 'text-white' : 'text-slate-900')}>
-              Simple, Transparent Pricing
-            </h2>
-          </MotionItem>
+          {eyebrowText && (
+            <MotionItem direction="down" duration={0.5}>
+              <span className="inline-flex items-center text-white/60 gap-1.5 px-3 py-1 rounded-full text-xs font-normal uppercase tracking-widest">
+                {eyebrowText}
+              </span>
+            </MotionItem>
+          )}
 
-          <MotionItem direction="up" distance={15} duration={0.5}>
-            <p
+          <MotionItem direction="scaleDown" scale={1.15} duration={0.6}>
+            <h1
               className={cn(
-                'text-sm sm:text-base font-normal leading-relaxed',
-                isHeadingDark ? 'text-white/80' : 'text-slate-500'
+                'text-4xl sm:text-6xl lg:text-[68px] font-normal tracking-tight leading-tight drop-shadow-sm',
+                isHeadingDark ? 'text-white' : 'text-slate-900'
               )}
             >
-              Choose the financial plan that fits your wealth creation journey. No hidden fees, no commission conflicts.
-            </p>
+              {title || 'Simple, Transparent Pricing'}
+            </h1>
           </MotionItem>
+
+          {!hideSubtitle && (
+            <MotionItem direction="up" distance={15} duration={0.5}>
+              <p
+                className={cn(
+                  'text-xs sm:text-base lg:text-[16px] font-normal leading-relaxed max-w-2xl mx-auto',
+                  isHeadingDark ? 'text-white/60' : 'text-slate-500'
+                )}
+              >
+                {subtitle ||
+                  'Choose the financial plan that fits your wealth creation journey. No hidden fees, no commission conflicts.'}
+              </p>
+            </MotionItem>
+          )}
         </div>
 
         {/* Pricing Card Outer Box */}

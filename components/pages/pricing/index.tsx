@@ -17,13 +17,13 @@ export const PricingPage = () => {
   return (
     <div className="relative w-full min-h-screen overflow-hidden select-none">
       {/* Top Hero Blue Gradient & Cloud Background Container */}
-      <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-34 sm:pt-38 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden select-none">
+      <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-34 sm:pt-20 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden select-none">
         <CloudAnimation height={70} opacity={1} speed={26} />
 
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-white/10 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-white/10 blur-[130px] rounded-full pointer-events-none" />
 
-        {/* Pricing Section Component (Renders plan cards & header) */}
-        <PricingSection hideBackground isHeadingDark />
+        {/* Pricing Section Component (Renders plan cards & header matching Blogs style without subtitle) */}
+        <PricingSection hideBackground isHeadingDark eyebrowText="TRANSPARENT PLANS" hideSubtitle />
       </section>
 
       {/* Main Page Content */}
