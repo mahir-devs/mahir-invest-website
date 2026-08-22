@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono, Syne } from "next/font/google";
 import { Navbar } from "@/components/common/navbar";
+import { BookDemoDialog } from "@/components/common/book-demo-dialog";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,6 +32,7 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
       <Navbar />
       {/* <div className="fixed top-0 left-0 w-full h-40 bg-[var(--blue-normal)] z-0" ></div> */}
       <main className="flex-1">{children}</main>
+      <BookDemoDialog />
     </>
   );
 }
