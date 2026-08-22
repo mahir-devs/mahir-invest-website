@@ -8,6 +8,7 @@ import { GlassButton } from '@/components/ui/glass-button';
 import { GlassCard } from '@/components/ui/glass-card';
 import { TradeUpIcons } from '@/components/svg/icons';
 import { MotionContainer, MotionItem } from '@/components/animations';
+import { SectionHeader } from '@/components/common/section-header';
 import { useStoreUrl } from '@/hooks/use-store-url';
 
 const ZERO_CARDS = [
@@ -97,7 +98,7 @@ export const MobileAppSection: React.FC = () => {
 
   return (
     <>
-      <div className="relative w-full bg-gradient-to-b from-[#e7f4fa] via-[#e7f4fa] to-white select-none overflow-hidden">
+      <div className="relative w-full select-none overflow-hidden">
         {/* Background Image Asset */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
           <Image
@@ -110,44 +111,31 @@ export const MobileAppSection: React.FC = () => {
         </div>
 
         {/* ─── Hero Mobile Mockup Showcase Section ─── */}
-        <section className="relative w-full pt-14 sm:pt-20 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 select-none z-10">
+        <section className="relative w-full pt-14 sm:pt-20 pb-16 sm:pb-24  select-none z-10">
           <MotionContainer
             staggerDelay={0.15}
             delay={0.1}
             className="relative max-w-6xl mx-auto text-center space-y-8 sm:space-y-12"
           >
+
             {/* Header Content */}
-            <div className="space-y-3 sm:space-y-4 max-w-3xl mx-auto">
-              <MotionItem direction="down" duration={0.5}>
-                <p className="text-xs sm:text-sm text-slate-500 font-medium tracking-widest uppercase">
-                  DOWNLOAD MAHIR APP
-                </p>
-              </MotionItem>
-
-              <MotionItem direction="scaleDown" scale={1.1} duration={0.6}>
-                <h2 className="text-3xl sm:text-5xl lg:text-[54px] font-normal text-slate-900 tracking-tight leading-tight">
-                  Built for clarity, speed, and peace of mind
-                </h2>
-              </MotionItem>
-
-              <MotionItem direction="up" distance={15} duration={0.5}>
-                <p className="text-xs sm:text-base text-slate-600 font-normal leading-relaxed max-w-xl mx-auto">
-                  Access non-conflicted research, track portfolios, and invest directly from our mobile application.
-                </p>
-              </MotionItem>
-            </div>
+            <SectionHeader
+              eyebrowText="MAHIR APP"
+              title="Experience <span class='font-syne font-[500]  '>MAHIR INVEST</span> mobile App"
+              subtitle={false}
+            />
 
             {/* CTA Button */}
-            <MotionItem direction="between" duration={0.5} className="flex justify-center pt-1">
+            <MotionItem direction="between" duration={0.5} className="flex justify-center ">
               <a href={storeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex">
                 <GlassButton
-                  variant="cyan"
+                  variant="light"
                   size="md"
                   isGlowIcon
                   label="Download Our App"
                   icon={<TradeUpIcons size={18} color="white" />}
                   iconBgColor="bg-[var(--green-normal)]"
-                  className="w-[215px] sm:w-[225px]"
+                  className="w-[215px] sm:w-[225px] border-[1px] border-[var(--blue-normal)]"
                 />
               </a>
             </MotionItem>
@@ -158,7 +146,7 @@ export const MobileAppSection: React.FC = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-80px' }}
-              className="relative w-full max-w-5xl mx-auto min-h-[220px] xs:min-h-[260px] sm:min-h-[440px] md:min-h-[500px] lg:min-h-[540px] flex items-center justify-center pt-6 sm:pt-10 pb-6 overflow-visible"
+              className="relative w-full  max-w-5xl mx-auto min-h-[220px] xs:min-h-[260px] sm:min-h-[440px] md:min-h-[400px] lg:min-h-[440px] flex items-center justify-center pb-6 overflow-visible"
             >
               {/* Phone Left 2 (glides out fourth) */}
               <motion.div
@@ -252,37 +240,22 @@ export const MobileAppSection: React.FC = () => {
           <MotionContainer
             staggerDelay={0.15}
             delay={0.1}
-            className="relative max-w-5xl mx-auto z-10 text-center px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8"
+            className="relative max-w-5xl mx-auto z-10 text-center  space-y-6 sm:space-y-8"
           >
-            {/* Eyebrow */}
-            <MotionItem direction="up" distance={20} duration={0.5}>
-              <p className="text-xs sm:text-sm text-slate-500 font-medium">
-                Pricing Philosophy
-              </p>
-            </MotionItem>
-
-            {/* Heading */}
-            <MotionItem direction="up" distance={25} duration={0.6} className="space-y-1">
-              <h2 className="text-3xl sm:text-[60px] md:text-5xl lg:text-[52px] font-normal text-slate-900 tracking-tight leading-[1.15]">
-                Zero Commissions
-              </h2>
-              <h2 className="text-3xl sm:text-[60px] md:text-5xl lg:text-[52px] font-normal text-slate-900 tracking-tight leading-[1.15]">
-                Zero Hidden Fees.
-              </h2>
-            </MotionItem>
-
-            {/* Description */}
-            <MotionItem direction="up" distance={20} duration={0.5} className="max-w-2xl mx-auto space-y-0.5">
-              <p className="text-xs sm:text-[15.05px] text-slate-500 font-normal leading-relaxed">
-                We never earn commissions from AMCs, brokers or third parties.
-              </p>
-              <p className="text-xs sm:text-[15.05px] text-slate-500 font-normal leading-relaxed">
-                Our only revenue is the advisory fee you pay, and that is why we are only answerable to you!
-              </p>
-            </MotionItem>
+            <SectionHeader
+              eyebrowText="Pricing Philosophy"
+              title="Zero Commissions<br />Zero Hidden Fees."
+              subtitle={
+                <>
+                  We never earn commissions from AMCs, brokers or third parties.<br className="hidden sm:inline" />
+                  Our only revenue is the advisory fee you pay, and that is why we are only answerable to you!
+                </>
+              }
+              subtitleClassName="max-w-3xl sm:max-w-4xl lg:max-w-5xl"
+            />
 
             {/* 0% Cards Grid - Compact Horizontal Bar Layout on Mobile */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-5 lg:gap-6 max-w-4xl mx-auto pt-2 sm:pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-5 lg:gap-6  mx-auto pt-2 sm:pt-4">
               {ZERO_CARDS.map((card) => (
                 <MotionItem key={card.id} direction="up" distance={20} duration={0.5}>
                   <GlassCard
@@ -290,7 +263,7 @@ export const MobileAppSection: React.FC = () => {
                     rounded="2xl"
                     padding="none"
                     blur="xl"
-                    className="bg-white/50 border-[var(--blue-normal)]/80 shadow-md shadow-slate-900/[0.03] flex flex-row sm:flex-col items-center justify-start sm:justify-center p-3.5 xs:p-4 sm:px-8 sm:py-9 sm:rounded-full rounded-2xl transition-all"
+                    className="bg-white/50 border-[.5px] border-[var(--blue-normal)]/40 shadow-md shadow-slate-900/[0.03] flex flex-row sm:flex-col items-center justify-start sm:justify-center p-3.5 xs:p-4 sm:px-4 sm:py-4 sm:rounded-full rounded-full transition-all"
                   >
                     {/* 0% Value */}
                     <span className="text-2xl xs:text-3xl sm:text-[44px] lg:text-[50px] font-light sm:font-extralight text-slate-800 tracking-tight leading-none shrink-0 sm:mb-3 w-12 xs:w-14 sm:w-auto text-center">

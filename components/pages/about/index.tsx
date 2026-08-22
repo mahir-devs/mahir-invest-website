@@ -79,16 +79,16 @@ export const AboutPage = () => {
 
             {/* Right Column: Leadership Copy */}
             <div className="w-full md:w-1/2 space-y-6 text-left">
-              <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+              <span className="text-md  font-semibold uppercase tracking-widest text-slate-400">
                 DIRECTOR
               </span>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-normal tracking-tight leading-[1.15]">
+              {/* <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-normal tracking-tight leading-[1.15]">
                 <span className="font-semibold text-slate-900">A Steady Hand</span>{' '}
                 <span className="text-slate-400 font-normal">Behind Every Recommendation.</span>
-              </h2>
+              </h2> */}
 
-              <p className="text-sm sm:text-base lg:text-[16px] text-slate-600 leading-relaxed font-normal">
+              <p className="text-sm mt-4 sm:text-base lg:text-[16px] text-slate-600 leading-relaxed font-normal">
                 Yash leads MAHIR Invest with a focus on building SEBI-registered advisory systems that serve clients first. His experience across research, advisory, and governance shapes the discipline and transparency behind every MAHIR Invest recommendation.
               </p>
 

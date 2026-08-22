@@ -10,6 +10,7 @@ import {
   NoHiddenChargesIcon,
 } from '@/components/svg/icons';
 import { MotionContainer, MotionItem } from '@/components/animations';
+import { SectionHeader } from '@/components/common/section-header';
 
 const NEVER_DO_CARDS = [
   {
@@ -45,7 +46,7 @@ export const NeverDoSection: React.FC = () => {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover opacity-60 object-center"
           style={{ mixBlendMode: 'screen' }}
         />
       </div>
@@ -55,27 +56,21 @@ export const NeverDoSection: React.FC = () => {
         delay={0.1}
         className="relative max-w-5xl mx-auto z-10 text-center px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8"
       >
-        {/* Eyebrow */}
-        <MotionItem direction="up" distance={20} duration={0.5}>
-          <p className="text-xs sm:text-[15px] uppercase text-[var(--red-dark)] font-medium tracking-wide">
-            Our Promise
-          </p>
-        </MotionItem>
-
-        {/* Heading */}
-        <MotionItem direction="up" distance={25} duration={0.6}>
-          <h2 className="text-3xl sm:text-4xl lg:text-[60px] font-normal text-slate-900 tracking-tight leading-tight">
-            Some things <span className="font-syne font-[500]">MAHIR</span> will never do.
-          </h2>
-        </MotionItem>
-
-        {/* Subtitle */}
-        <MotionItem direction="up" distance={20} duration={0.5}>
-          <p className="text-sm sm:text-[17px] text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto">
-            Because <span className="font-semibold uppercase tracking-wider">YOUR TRUST</span> is more{' '}
-            <span className="font-semibold uppercase tracking-wider">IMPORTANT</span> than anythings else.
-          </p>
-        </MotionItem>
+        <SectionHeader
+          eyebrowText="Our Promise"
+          eyebrowClassName="!text-[var(--red-dark)]"
+          title={
+            <>
+              Some things <span className="font-syne font-[500]">MAHIR</span> will never do.
+            </>
+          }
+          subtitle={
+            <>
+              Because <span className="font-semibold uppercase tracking-wider">YOUR TRUST</span> is more{' '}
+              <span className="font-semibold uppercase tracking-wider">IMPORTANT</span> than anythings else.
+            </>
+          }
+        />
 
         {/* 2-Column Cards Grid on Mobile & Desktop */}
         <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-5 lg:gap-6 max-w-3xl mx-auto pt-2 sm:pt-6">
@@ -110,7 +105,7 @@ export const NeverDoSection: React.FC = () => {
             rounded="full"
             padding="sm"
             blur="xl"
-            className="bg-[var(--red-light)]/60 border-[var(--red-light-active)] shadow-md shadow-[var(--red-normal)]/[0.06] max-w-3xl mx-auto inline-flex items-center justify-center rounded-[20px] sm:rounded-full"
+            className="bg-[var(--red-light)]/60 border-[var(--red-light-active)] shadow-md shadow-[var(--red-normal)]/[0.06] max-w-3xl mx-auto inline-flex items-center justify-center rounded-full sm:rounded-full"
           >
             <p className="text-xs sm:text-sm lg:text-[16px] text-[var(--red-normal)] font-medium leading-relaxed px-3 sm:px-4 py-1 sm:py-0">
               If this is what you want, <span className="font-syne font-[500]">MAHIR</span> is not for you, and we will tell you that{' '}

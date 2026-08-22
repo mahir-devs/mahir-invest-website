@@ -6,6 +6,7 @@ import CloudAnimation from '@/components/animations/ClaudeAnimation';
 import { Footer } from '@/components/common/footer';
 import { SectionDivider } from '@/components/common/section-divider';
 import { MotionContainer, MotionItem } from '@/components/animations';
+import { SectionHeader } from '@/components/common/section-header';
 import { ArrowLeft } from 'lucide-react';
 import type { CalculatorConfig } from '@/lib/calculators/config';
 
@@ -29,25 +30,13 @@ export const CalculatorPageLayout: React.FC<CalculatorPageLayoutProps> = ({
         delay={0.1}
         className="relative max-w-6xl mx-auto text-center z-10 space-y-10 sm:space-y-14"
       >
-        <div className="space-y-2 sm:space-y-3 max-w-3xl mx-auto">
-          <MotionItem direction="down" duration={0.5}>
-            <p className="text-xs sm:text-[14px] uppercase text-sky-200 font-medium tracking-widest">
-              {config.eyebrow}
-            </p>
-          </MotionItem>
-
-          <MotionItem direction="scaleDown" scale={1.15} duration={0.6}>
-            <h1 className="text-4xl sm:text-6xl lg:text-[68px] font-normal text-white tracking-tight leading-tight drop-shadow-sm">
-              {config.title}
-            </h1>
-          </MotionItem>
-
-          <MotionItem direction="up" distance={15} duration={0.5}>
-            <p className="text-xs sm:text-base lg:text-[15px] text-white/90 font-normal leading-relaxed max-w-2xl mx-auto">
-              {config.description}
-            </p>
-          </MotionItem>
-        </div>
+        <SectionHeader
+          isHeadingDark
+          eyebrowText={config.eyebrow}
+          eyebrowClassName="!text-sky-200"
+          title={config.title}
+          subtitle={config.description}
+        />
 
         <MotionItem direction="down" duration={0.4}>
           <div className="flex justify-start max-w-5xl mx-auto">

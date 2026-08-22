@@ -12,6 +12,7 @@ import CloudAnimation from '@/components/animations/ClaudeAnimation';
 import { Footer } from '@/components/common/footer';
 import { SectionDivider } from '@/components/common/section-divider';
 import { MotionContainer, MotionItem } from '@/components/animations';
+import { SectionHeader } from '@/components/common/section-header';
 import { ArrowLeft } from 'lucide-react';
 
 export interface CalculatorDetailPageProps {
@@ -31,16 +32,13 @@ const CalculatorNotFound: React.FC = () => (
     <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-34 sm:pt-38 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <CloudAnimation height={90} opacity={1} speed={26} />
       <MotionContainer className="relative max-w-2xl mx-auto text-center z-10 space-y-8">
-        <MotionItem direction="down" duration={0.5}>
-          <h1 className="text-4xl sm:text-5xl font-normal text-white tracking-tight">
-            Calculator Not Found
-          </h1>
-        </MotionItem>
-        <MotionItem direction="up" duration={0.5}>
-          <p className="text-white/80 text-sm sm:text-base">
-            The calculator you are looking for does not exist yet.
-          </p>
-        </MotionItem>
+        <SectionHeader
+          isHeadingDark
+          eyebrowText="Error 404"
+          eyebrowClassName="!text-sky-200"
+          title="Calculator Not Found"
+          subtitle="The calculator you are looking for does not exist yet."
+        />
         <MotionItem direction="up" duration={0.5}>
           <Link
             href="/tools"

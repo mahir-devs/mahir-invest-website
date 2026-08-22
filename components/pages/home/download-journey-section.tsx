@@ -5,6 +5,7 @@ import { GlassCard } from '@/components/ui/glass-card';
 import { PlayStoreIcon, AppStoreIcon } from '@/components/svg/icons';
 import Image from 'next/image';
 import { MotionContainer, MotionItem } from '@/components/animations';
+import { SectionHeader } from '@/components/common/section-header';
 import { GET_APP_QR_SRC, PLAY_STORE_URL, APP_STORE_URL } from '@/lib/assets';
 
 export const DownloadJourneySection: React.FC = () => {
@@ -26,27 +27,16 @@ export const DownloadJourneySection: React.FC = () => {
         delay={0.1}
         className="relative max-w-6xl mx-auto z-10 text-center px-4 sm:px-6 lg:px-8 space-y-4 sm:space-y-4"
       >
-        {/* Eyebrow */}
-        <MotionItem direction="up" distance={20} duration={0.5}>
-          <p className="text-xs sm:text-[15px] uppercase text-slate-500 font-medium">
-            MAHIR APP
-          </p>
-        </MotionItem>
-
-        {/* Main Heading */}
-        <MotionItem direction="up" distance={25} duration={0.6}>
-          <h2 className="text-3xl sm:text-6xl md:text-5xl lg:text-[60px] font-normal text-slate-900 tracking-tight leading-tight">
-            Start Your Journey to Become{' '}
-            <span className="font-syne font-[500]">MAHIR.</span>
-          </h2>
-        </MotionItem>
-
-        {/* Subtitle */}
-        <MotionItem direction="up" distance={20} duration={0.5}>
-          <p className="text-sm sm:text-base text-slate-500 font-normal tracking-wide">
-            Download the MAHIR App
-          </p>
-        </MotionItem>
+        <SectionHeader
+          eyebrowText="MAHIR APP"
+          title={
+            <>
+              Start Your Journey to Become{' '}
+              <span className="font-syne font-[500]">MAHIR.</span>
+            </>
+          }
+          subtitle="Download the MAHIR App"
+        />
 
         {/* QR Code Container */}
         <MotionItem direction="scaleUp" scale={0.92} duration={0.6} className="flex justify-center pt-6 sm:pt-8">

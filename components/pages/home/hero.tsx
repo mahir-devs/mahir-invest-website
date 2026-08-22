@@ -15,7 +15,7 @@ export const HeroSection: React.FC = () => {
   const { storeUrl } = useStoreUrl();
   return (
     <section className="relative  w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-34 sm:pt-38 overflow-hidden select-none">
-      <CloudAnimation height={90} opacity={.8} speed={26} />
+      <CloudAnimation height={70} opacity={.8} speed={26} />
 
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-white/10 blur-[120px] rounded-full pointer-events-none" />
 

@@ -7,6 +7,7 @@ import { Footer } from '@/components/common/footer';
 import { GlassCard } from '@/components/ui/glass-card';
 import { SectionDivider } from '@/components/common/section-divider';
 import { MotionContainer, MotionItem } from '@/components/animations';
+import { SectionHeader } from '@/components/common/section-header';
 
 export interface PerkItem {
   id: string;
@@ -67,33 +68,21 @@ export const CareersPage = () => {
           {/* Careers Hero Section */}
           <div className="space-y-8 sm:space-y-12">
             {/* Header Title */}
-            <div className="space-y-2 sm:space-y-3 max-w-2xl mx-auto">
-              <MotionItem direction="down" duration={0.5}>
-                <p className="text-xs sm:text-[14px] uppercase text-sky-200 font-medium tracking-widest">
-                  JOIN OUR MISSION
-                </p>
-              </MotionItem>
-
-              <MotionItem direction="scaleDown" scale={1.15} duration={0.6}>
-                <h1 className="text-4xl sm:text-6xl lg:text-[68px] font-normal text-white tracking-tight leading-tight drop-shadow-sm">
-                  Careers
-                </h1>
-              </MotionItem>
-
-              <MotionItem direction="up" distance={15} duration={0.5}>
-                <p className="text-xs sm:text-base lg:text-[17px] text-white/90 font-normal leading-relaxed max-w-xl mx-auto">
-                  Learn about life at MAHIR and the values that shape how we work.
-                </p>
-              </MotionItem>
-            </div>
+            <SectionHeader
+              isHeadingDark
+              eyebrowText="Join Our Mission"
+              eyebrowClassName="!text-sky-200"
+              title="Careers"
+              subtitle="Learn about life at MAHIR and the values that shape how we work."
+            />
 
             {/* "We're not hiring right now" Glass Card */}
-            <MotionItem direction="up" distance={30} duration={0.65} className="max-w-2xl mx-auto w-full">
+            <MotionItem direction="up" distance={30} duration={0.65} className=" mx-auto w-full">
               <GlassCard
                 variant="dark"
                 rounded="3xl"
                 padding="none"
-                className=" border border-white/90 shadow-xl text-center p-8 sm:p-12 space-y-3"
+                className=" border border-white/90 shadow-none text-center p-8 sm:p-12 space-y-3"
               >
                 <div className="w-12 h-12 rounded-full bg-slate-100/90 border border-slate-200/80 flex items-center justify-center mx-auto mb-2 text-slate-700">
                   <Clock className="w-6 h-6 stroke-[1.75]" />
@@ -111,28 +100,17 @@ export const CareersPage = () => {
           {/* Perks & Benefits Section inside Blue Sky Background */}
           <div className="space-y-10 sm:space-y-14">
             {/* Section Heading */}
-            <div className="space-y-2 sm:space-y-3 max-w-2xl mx-auto">
-              <MotionItem direction="up" distance={20} duration={0.5}>
-                <p className="text-xs sm:text-[14px] uppercase text-[var(--blue-normal)]/50 font-medium tracking-widest">
-                  JOIN US
-                </p>
-              </MotionItem>
-
-              <MotionItem direction="up" distance={25} duration={0.6}>
-                <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-normal text-gray-700 tracking-tight leading-tight">
-                  Our Perks And Benefits
-                </h2>
-              </MotionItem>
-
-              <MotionItem direction="up" distance={20} duration={0.5}>
-                <p className="text-xs sm:text-sm lg:text-[15px] text-gray-500/90 font-normal leading-relaxed max-w-lg mx-auto">
-                  We believe great work happens where people feel supported, trusted, and valued.
-                </p>
-              </MotionItem>
-            </div>
+            <SectionHeader
+              eyebrowText="Join us"
+              eyebrowClassName=" "
+              title="Our Perks And Benefits"
+              titleClassName="!text-gray-700 !text-3xl sm:!text-4xl lg:!text-[44px]"
+              subtitle="We believe great work happens where people feel supported, trusted, and valued."
+              subtitleClassName="!text-gray-500/90 !max-w-lg"
+            />
 
             {/* 6 Perks Cards Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto text-left">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6  mx-auto text-left">
               {PERKS_DATA.map((perk) => (
                 <MotionItem key={perk.id} direction="up" distance={25} duration={0.5}>
                   <GlassCard
