@@ -8,6 +8,8 @@ import { SectionDivider } from '@/components/common/section-divider';
 import { MotionContainer, MotionItem } from '@/components/animations';
 import { GlassCard } from '@/components/ui/glass-card';
 
+import { SectionHeader } from '@/components/common/section-header';
+
 export const AboutPage = () => {
   return (
     <div className="relative w-full min-h-screen overflow-hidden select-none bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-light)] via-50% to-white">
@@ -16,23 +18,17 @@ export const AboutPage = () => {
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-white/10 blur-[130px] rounded-full pointer-events-none" />
 
         <MotionContainer staggerDelay={0.15} delay={0.1} className="relative max-w-4xl mx-auto z-10 space-y-6 text-center">
-          <MotionItem direction="scaleDown" scale={1.1} duration={0.6}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium tracking-wide text-white backdrop-blur-md">
-              Built for You With Clarity
-            </span>
-          </MotionItem>
-
-          <MotionItem direction="up" distance={15} duration={0.5}>
-            <h1 className="text-4xl sm:text-6xl font-normal text-white tracking-tight leading-tight drop-shadow-sm">
-              About
-            </h1>
-          </MotionItem>
-
-          <MotionItem direction="up" distance={20} duration={0.6}>
-            <p className="text-base sm:text-xl text-white/90 font-normal leading-relaxed max-w-3xl mx-auto">
-              <strong className="font-semibold text-white">MAHIR Invest</strong> is a SEBI-registered Investment Adviser built to help investors think clearly, decide confidently, and build wealth sustainably through research-backed stock recommendations and disciplined risk management.
-            </p>
-          </MotionItem>
+          <SectionHeader
+            isHeadingDark
+            eyebrowText="Built for You With Clarity"
+            title="About"
+            subtitle={
+              <>
+                <strong className="font-semibold font-syne text-white">MAHIR </strong>Invest is a SEBI-registered Investment Adviser built to help investors think clearly, decide confidently, and build wealth sustainably through research-backed stock recommendations and disciplined risk management.
+              </>
+            }
+            subtitleClassName="max-w-3xl sm:max-w-4xl text-base sm:text-xl leading-relaxed text-white/90"
+          />
         </MotionContainer>
       </section>
 
@@ -50,7 +46,7 @@ export const AboutPage = () => {
           >
             <div className="space-y-4 text-base sm:text-lg leading-relaxed text-slate-700 font-normal">
               <p>
-                MAHIR Invest is built to help you invest with more clarity and less noise. Every research note, portfolio update, and recommendation is designed to make your investment decisions better, simpler, and more confident.
+                <span className='font-syne font-semibold'>MAHIR </span> Invest is built to help you invest with more <span className='font-syne'>clarity</span> and less noise. Every research note, portfolio update, and recommendation is designed to make your investment decisions better, simpler, and more confident.
               </p>
               <p>
                 We do not chase trends or push commission-driven products. Our advisory starts with one question: <strong className="font-semibold text-slate-900">will this help the client build wealth over time?</strong> That question drives our stock research, risk framework, portfolio reviews, and the way we communicate every investment idea.
@@ -89,7 +85,7 @@ export const AboutPage = () => {
               </h2> */}
 
               <p className="text-sm mt-4 sm:text-base lg:text-[16px] text-slate-600 leading-relaxed font-normal">
-                Yash leads MAHIR Invest with a focus on building SEBI-registered advisory systems that serve clients first. His experience across research, advisory, and governance shapes the discipline and transparency behind every MAHIR Invest recommendation.
+                Yash leads <span className='font-syne font-semibold'>MAHIR </span> Invest with a focus on building SEBI-registered advisory systems that serve clients first. His experience across research, advisory, and governance shapes the discipline and transparency behind every MAHIR Invest recommendation.
               </p>
 
               <blockquote className="text-sm sm:text-base text-slate-700 italic font-normal pt-4 border-t border-slate-200/80">

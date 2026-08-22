@@ -32,6 +32,9 @@ export const Footer: React.FC = () => {
           <Link href="/pricing" className="hover:text-[var(--blue-normal)] transition-colors">
             Pricing
           </Link>
+          <Link href="/about" className="hover:text-[var(--blue-normal)] ml-4 transition-colors">
+            About
+          </Link>
           <span className="text-slate-300">·</span>
           <Link href="/tools" className="hover:text-[var(--blue-normal)] transition-colors">
             Tools
@@ -45,9 +48,7 @@ export const Footer: React.FC = () => {
             Careers
           </Link>
           <span className="text-slate-300">·</span>
-          {/* <Link href="/team" className="hover:text-[var(--blue-normal)] transition-colors">
-            Team
-          </Link> */}
+
         </div>
 
         {/* Secondary / Legal Links */}

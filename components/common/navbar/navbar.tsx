@@ -38,9 +38,11 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
 
   { label: 'Blogs', href: '/blogs' },
   // { label: 'News', href: '/news' },
+  { label: 'About', href: '/about' },
   {
     label: 'Tools',
     href: '/tools',
+
     hasDropdown: true,
     dropdownItems: [
       { label: 'SIP Calculator', href: '/tools/sip-calculator' },
@@ -50,6 +52,7 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
     ],
   },
   { label: 'Careers', href: '/careers' },
+
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({
