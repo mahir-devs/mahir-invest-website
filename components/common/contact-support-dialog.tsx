@@ -42,7 +42,7 @@ export const ContactSupportDialog: React.FC<ContactSupportDialogProps> = ({
           href={`mailto:${SUPPORT_EMAIL}`}
           className="flex items-center gap-4 rounded-2xl border border-sky-100 bg-sky-50/60 px-4 py-4 transition-all hover:border-sky-200 hover:bg-sky-50 group"
         >
-          <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--blue-normal)] text-white shadow-sm">
+          <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--blue-normal)]/5 text-[var(--blue-normal)] border-1 border-[var(--blue-normal)] shadow-sm">
             <Mail className="h-5 w-5" strokeWidth={2} />
           </span>
           <span className="min-w-0 text-left">

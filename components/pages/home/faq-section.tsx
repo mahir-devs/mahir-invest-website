@@ -5,6 +5,7 @@ import { GlassCard } from '@/components/ui/glass-card';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SectionHeader } from '@/components/common/section-header';
 
 export interface FaqItem {
   id: string;
@@ -17,7 +18,7 @@ export const FAQ_DATA: FaqItem[] = [
     id: 'money',
     question: 'I don’t have a lot of money. Can I still start?',
     answer:
-      'Lorem ipsum dolor sit amet consectetur. Accumsan sit et curabitur quisque purus quis dictum eget. Lorem ipsum dolor sit amet consectetur. Accumsan sit et curabitur quisque purus quis dictum eget.',
+      'Yes, absolutely! MAHIR is designed for every investor starting their journey. With plans starting at just ₹14/day, you get access to research-backed recommendations tailored to help you build wealth at your own pace.',
   },
   {
     id: 'different',
@@ -61,20 +62,11 @@ export const FaqSection: React.FC = () => {
       </div>
 
       <div className="relative max-w-4xl mx-auto z-10 text-center px-4 sm:px-6 lg:px-8 space-y-4 sm:space-y-4">
-        {/* Eyebrow */}
-        <p className="text-xs sm:text-[14px] uppercase text-slate-400 font-medium">
-          FAQ&apos;s
-        </p>
-
-        {/* Main Heading */}
-        <h2 className="text-3xl sm:text-5xl lg:text-[60px] font-normal text-slate-900 tracking-tight leading-tight">
-          Still Wondering?
-        </h2>
-
-        {/* Questions Subtitle */}
-        <p className="text-xs sm:text-[15px] text-slate-500 font-medium tracking-wide">
-          Questions
-        </p>
+        <SectionHeader
+          eyebrowText="FAQ'S"
+          title="Still Wondering?"
+          subtitle="Questions"
+        />
 
         {/* Accordion Container */}
         <div className="space-y-4 sm:space-y-5 pt-8 text-left max-w-3xl mx-auto">

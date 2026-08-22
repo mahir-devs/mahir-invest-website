@@ -68,6 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState<{ [key: string]: boolean }>({});
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -75,6 +76,15 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [contactSupportOpen, setContactSupportOpen] = useState(false);
   const [imgError, setImgError] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
+
+  const toggleMobileDropdown = (label: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setMobileDropdownOpen((prev) => ({
+      ...prev,
+      [label]: !prev[label],
+    }));
+  };
 
   // Fetch latest user profile data on mount / refresh
   useEffect(() => {
@@ -402,49 +412,76 @@ export const Navbar: React.FC<NavbarProps> = ({
           <ul className="space-y-2">
             {navItems.map((item) => {
               const isActive = isItemActive(item);
+              const isSubOpen = Boolean(mobileDropdownOpen[item.label]);
 
               return (
                 <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className={cn(
-                      'flex items-center justify-between px-3.5 py-2.5 rounded-xl text-base font-medium transition-colors',
-                      isActive
-                        ? isFloating
-                          ? 'text-sky-600 bg-sky-50 font-semibold'
-                          : 'text-white bg-white/20 font-semibold'
-                        : isFloating
-                          ? 'text-slate-900 hover:text-[var(--blue-normal)]'
-                          : 'text-white hover:text-white/80'
-                    )}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span>{item.label}</span>
-
-                  </a>
-                  {item.hasDropdown && item.dropdownItems && (
-                    <div
-                      className={cn(
-                        'pl-4 mt-2 space-y-2 border-l-2',
-                        isFloating ? 'border-slate-200' : 'border-white/20'
-                      )}
-                    >
-                      {item.dropdownItems.map((subItem) => (
-                        <a
-                          key={subItem.label}
-                          href={subItem.href}
+                  {item.hasDropdown && item.dropdownItems ? (
+                    <>
+                      <div
+                        className={cn(
+                          'flex items-center justify-between px-3.5 py-2.5 rounded-xl text-base font-medium transition-colors cursor-pointer select-none',
+                          isActive
+                            ? isFloating
+                              ? 'text-sky-600 bg-sky-50 font-semibold'
+                              : 'text-white bg-white/20 font-semibold'
+                            : isFloating
+                              ? 'text-slate-900 hover:text-[var(--blue-normal)]'
+                              : 'text-white hover:text-white/80'
+                        )}
+                        onClick={(e) => toggleMobileDropdown(item.label, e)}
+                      >
+                        <span>{item.label}</span>
+                        <ChevronDown
                           className={cn(
-                            'block text-sm transition-colors',
-                            isFloating
-                              ? 'text-slate-600 hover:text-slate-900'
-                              : 'text-white/90 hover:text-white'
+                            'w-5 h-5 transition-transform duration-200',
+                            isSubOpen ? 'rotate-180' : 'rotate-0'
                           )}
-                          onClick={() => setMobileMenuOpen(false)}
+                        />
+                      </div>
+
+                      {isSubOpen && (
+                        <div
+                          className={cn(
+                            'pl-4 mt-2 mb-2 space-y-2 border-l-2',
+                            isFloating ? 'border-slate-200' : 'border-white/20'
+                          )}
                         >
-                          {subItem.label}
-                        </a>
-                      ))}
-                    </div>
+                          {item.dropdownItems.map((subItem) => (
+                            <a
+                              key={subItem.label}
+                              href={subItem.href}
+                              className={cn(
+                                'block text-sm py-1 transition-colors',
+                                isFloating
+                                  ? 'text-slate-600 hover:text-slate-900'
+                                  : 'text-white/90 hover:text-white'
+                              )}
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {subItem.label}
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <a
+                      href={item.href}
+                      className={cn(
+                        'flex items-center justify-between px-3.5 py-2.5 rounded-xl text-base font-medium transition-colors',
+                        isActive
+                          ? isFloating
+                            ? 'text-sky-600 bg-sky-50 font-semibold'
+                            : 'text-white bg-white/20 font-semibold'
+                          : isFloating
+                            ? 'text-slate-900 hover:text-[var(--blue-normal)]'
+                            : 'text-white hover:text-white/80'
+                      )}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <span>{item.label}</span>
+                    </a>
                   )}
                 </li>
               );

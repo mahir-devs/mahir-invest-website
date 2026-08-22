@@ -10,6 +10,7 @@ import {
 } from '@/components/svg/icons';
 import Image from 'next/image';
 import { MotionContainer, MotionItem } from '@/components/animations';
+import { SectionHeader } from '@/components/common/section-header';
 
 const WHY_MAHIR_CARDS = [
   {
@@ -22,7 +23,7 @@ const WHY_MAHIR_CARDS = [
     id: 'research-backed',
     icon: (size: number) => <CopySearchIcon size={size} color="#1B99D4" />,
     title: 'Research Backed',
-    description: 'In-depth research by SEBI registered analysis',
+    description: 'In-depth research by SEBI registered analysts',
   },
   {
     id: 'highlighting-risk',
@@ -57,30 +58,23 @@ export const WhyMahirSection: React.FC = () => {
         delay={0.1}
         className="relative max-w-4xl mx-auto z-10 text-center px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-4"
       >
-        {/* Eyebrow */}
-        <MotionItem direction="up" distance={20} duration={0.5}>
-          <p className="text-xs sm:text-[15px] uppercase text-slate-500 font-medium tracking-wide">
-            Why MAHIR
-          </p>
-        </MotionItem>
-
-        {/* Heading */}
-        <MotionItem direction="up" distance={25} duration={0.6}>
-          <h2 className="text-3xl sm:text-4xl lg:text-[60px] font-normal text-[var(--blue-darker)] tracking-tight leading-tight">
-            Why is <span className="font-syne font-[500]">MAHIR</span> different?
-          </h2>
-        </MotionItem>
-
-        {/* Subtitle */}
-        <MotionItem direction="up" distance={20} duration={0.5}>
-          <p className="text-sm sm:text-[22px] text-slate-500 font-normal leading-relaxed max-w-xl mx-auto">
-            Everyone has Stock tips, <span className="font-syne font-[500]">MAHIR</span> has the{' '}
-            <span className="font-semibold tracking-wider uppercase">RESEARCH</span>
-          </p>
-        </MotionItem>
+        <SectionHeader
+          eyebrowText="Why MAHIR"
+          title={
+            <>
+              Why is <span className="font-syne font-[500]">MAHIR</span> different?
+            </>
+          }
+          subtitle={
+            <>
+              Everyone has Stock tips, <span className="font-syne font-[500]">MAHIR</span> has the{' '}
+              <span className="font-semibold tracking-wider uppercase">RESEARCH</span>
+            </>
+          }
+        />
 
         {/* 2-Column Cards Grid on Mobile & Desktop */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-5 lg:gap-6 max-w-3xl mx-auto pt-2 sm:pt-8">
+        <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-5 lg:gap-6 max-w-4xl mx-auto pt-2 sm:pt-8">
           {WHY_MAHIR_CARDS.map((card) => (
             <MotionItem key={card.id} direction="up" distance={30} duration={0.55}>
               <GlassCard
@@ -88,7 +82,7 @@ export const WhyMahirSection: React.FC = () => {
                 rounded="full"
                 padding="none"
                 blur="xl"
-                className="border-[var(--blue-normal)] rounded-[24px] lg:rounded-full text-center flex flex-col items-center justify-center px-3 py-5 sm:px-6 sm:py-8 lg:p-10 min-h-[160px] sm:min-h-[220px]"
+                className="border-[var(--blue-normal)] shadow-none rounded-[24px] lg:rounded-full text-center flex flex-col items-center justify-center px-3 py-5 sm:px-9 sm:py-8 lg:p-10 min-h-[160px] sm:min-h-[220px]"
               >
                 {/* Icon */}
                 <div className="mb-2 sm:mb-4 flex items-center justify-center">

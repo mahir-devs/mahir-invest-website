@@ -17,13 +17,26 @@ export const PricingPage = () => {
   return (
     <div className="relative w-full min-h-screen overflow-hidden select-none">
       {/* Top Hero Blue Gradient & Cloud Background Container */}
-      <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-34 sm:pt-20 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden select-none">
-        <CloudAnimation height={70} opacity={1} speed={26} />
+      <section className="relative w-full bg-gradient-to-b from-[var(--blue-normal)] via-[var(--blue-normal)] via-40% to-[var(--blue-light)] text-white pt-34 sm:pt-38 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden select-none">
+        <CloudAnimation height={65} opacity={1} speed={26} />
 
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-white/10 blur-[130px] rounded-full pointer-events-none" />
 
-        {/* Pricing Section Component (Renders plan cards & header matching Blogs style without subtitle) */}
-        <PricingSection hideBackground isHeadingDark eyebrowText="TRANSPARENT PLANS" hideSubtitle />
+        {/* Pricing Section Component */}
+        <PricingSection
+          hideBackground
+          isHeadingDark
+          eyebrowText="Starting your investment journey"
+          title="Aarambh"
+          subtitle={
+            <>
+              Choose how you’d like to{' '}
+              <span className="font-bold text-white">
+                START YOUR JOURNEY.
+              </span>
+            </>
+          }
+        />
       </section>
 
       {/* Main Page Content */}

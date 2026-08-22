@@ -48,11 +48,10 @@ export default function GlassCardTestPage() {
                   key={v}
                   type="button"
                   onClick={() => setSelectedVariant(v)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition ${
-                    selectedVariant === v
-                      ? 'bg-sky-500 text-white shadow-md'
-                      : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white'
-                  }`}
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition ${selectedVariant === v
+                    ? 'bg-sky-500 text-white shadow-md'
+                    : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white'
+                    }`}
                 >
                   {v}
                 </button>
@@ -71,11 +70,10 @@ export default function GlassCardTestPage() {
                   key={r}
                   type="button"
                   onClick={() => setSelectedRounded(r)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition ${
-                    selectedRounded === r
-                      ? 'bg-sky-600 text-white shadow-md'
-                      : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white'
-                  }`}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition ${selectedRounded === r
+                    ? 'bg-sky-600 text-white shadow-md'
+                    : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white'
+                    }`}
                 >
                   {r}
                 </button>
@@ -94,11 +92,10 @@ export default function GlassCardTestPage() {
                   key={p}
                   type="button"
                   onClick={() => setSelectedPadding(p)}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-medium uppercase transition ${
-                    selectedPadding === p
-                      ? 'bg-sky-600 text-white shadow-md'
-                      : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white'
-                  }`}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-medium uppercase transition ${selectedPadding === p
+                    ? 'bg-sky-600 text-white shadow-md'
+                    : 'bg-slate-950 border border-slate-800 text-slate-400 hover:text-white'
+                    }`}
                 >
                   {p}
                 </button>
@@ -178,7 +175,7 @@ export default function GlassCardTestPage() {
               💻 Code Usage Snippet
             </h3>
             <pre className="bg-slate-950 p-4 rounded-2xl text-xs font-mono text-sky-300 overflow-x-auto border border-slate-800">
-{`import { GlassCard } from '@/components/ui/glass-card';
+              {`import { GlassCard } from '@/components/ui/glass-card';
 
 <GlassCard
   variant="${selectedVariant}"

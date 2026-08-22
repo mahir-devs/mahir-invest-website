@@ -21,7 +21,7 @@ export const glassCardVariants = cva(
         cyan:
           'bg-cyan-950/40 backdrop-blur-xl border border-cyan-400/30 text-white shadow-lg shadow-cyan-950/20',
         emerald:
-          'bg-emerald-950/5 backdrop-blur-xl border border-emerald-400/30 text-white shadow-lg shadow-emerald-950/20',
+          'bg-[#00AD17]/5 backdrop-blur-xl border border-[#00AD17]/30 text-white shadow-lg shadow-[#00AD17]/20',
       },
       rounded: {
         none: 'rounded-none',

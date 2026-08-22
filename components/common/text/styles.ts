@@ -24,7 +24,7 @@ export const DEFAULT_VARIANT_TAGS: Record<TextVariant, ElementType> = {
  */
 export const VARIANT_STYLES: Record<TextVariant, string> = {
   'hero-title':
-    'text-3xl sm:text-[67px] md:text-[67px] lg:text-[67px] font-normal tracking-[-2.67px] leading-[124%]',
+    'text-3xl sm:text-[60px] md:text-[60px] lg:text-[60px] font-normal tracking-[-2.67px] leading-[124%]',
 
   'hero-syne':
     'font-syne text-3xl sm:text-5xl md:text-6xl lg:text-[67px] font-extrabold tracking-tight leading-[1.15]',

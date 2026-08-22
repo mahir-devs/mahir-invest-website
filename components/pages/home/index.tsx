@@ -17,7 +17,9 @@ const HomePage = () => {
       <div className="relative z-10 w-full">
         <HeroSection />
         <SectionDivider />
-        <PricingSection />
+        <div className='lg:mt-[112px]'>
+          <PricingSection />
+        </div>
         <SectionDivider />
         <FeaturesSection />
         <SectionDivider />

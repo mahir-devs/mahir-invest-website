@@ -38,7 +38,7 @@ export const FEATURES_DATA: FeatureItem[] = [
     id: 'market-insights',
     icon: <InsightBulbIcons size={28} color="#febe0e" />,
     title: 'Market insights',
-    description: 'Visual Insigts for Better clarity',
+    description: 'Visual Insights for Better clarity',
   },
   {
     id: 'learn-while-you-invest',
@@ -81,17 +81,15 @@ export const FeaturesSection: React.FC = () => {
       >
         {/* Main Heading with Blue Brush Underline */}
         <MotionItem direction="up" distance={25} duration={0.6}>
-          <div className="text-center flex flex-col items-center justify-center">
-            <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-normal sm:font-medium text-slate-900 tracking-tight leading-tight">
-              What changes when you
+          <div className="text-center mb-10 flex lg:flex-row flex-col items-center justify-center lg:gap-[10px]">
+            <h2 className="text-2xl sm:text-4xl lg:text-[40px] font-normal sm:font-normal text-slate-900 tracking-tight leading-tight">
+              What changes when you have
             </h2>
             <div className="relative inline-flex flex-col items-center mt-0.5">
               <span className="text-2xl sm:text-4xl lg:text-[40px] font-normal sm:font-medium text-slate-900 tracking-tight leading-tight">
-                have <span className="font-syne font-medium">MAHIR</span>
+                <span className="font-syne font-medium">MAHIR</span>
               </span>
-              <div className="w-36 sm:w-48 -mt-1 sm:-mt-1.5 overflow-hidden flex justify-center">
-                <BlueLineIcons />
-              </div>
+
             </div>
           </div>
         </MotionItem>

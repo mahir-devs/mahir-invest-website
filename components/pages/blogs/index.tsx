@@ -6,6 +6,7 @@ import { Footer } from '@/components/common/footer';
 import { BlogCard } from '@/components/common/cards';
 import { SectionDivider } from '@/components/common/section-divider';
 import { MotionContainer, MotionItem } from '@/components/animations';
+import { SectionHeader } from '@/components/common/section-header';
 import { BLOG_POSTS, BlogPost, getCategories } from '@/lib/blogs';
 import { Search, SlidersHorizontal, Sparkles } from 'lucide-react';
 
@@ -62,25 +63,13 @@ export const BlogsPage = () => {
           className="relative max-w-6xl mx-auto text-center z-10 space-y-8 sm:space-y-12"
         >
           {/* Header Title */}
-          <div className="space-y-3 mb-20 max-w-3xl mx-auto">
-            <MotionItem direction="down" duration={0.5}>
-              <span className="inline-flex items-center text-white/60 gap-1.5 px-3 py-1 rounded-full text-xs font-normal uppercase tracking-widest ">
-                RESOURCES
-              </span>
-            </MotionItem>
-
-            <MotionItem direction="scaleDown" scale={1.15} duration={0.6}>
-              <h1 className="text-4xl sm:text-6xl lg:text-[68px] font-normal text-white tracking-tight leading-tight drop-shadow-sm">
-                Blogs &amp; Insights
-              </h1>
-            </MotionItem>
-
-            <MotionItem direction="up" distance={15} duration={0.5}>
-              <p className="text-xs sm:text-base lg:text-[16px] text-white/60 font-normal leading-relaxed max-w-2xl mx-auto">
-                Educational insights and research-backed advisory content.
-              </p>
-            </MotionItem>
-          </div>
+          <SectionHeader
+            isHeadingDark
+            eyebrowText="RESOURCES"
+            title="Blogs & Insights"
+            subtitle="Educational insights and research-backed advisory content."
+            className="mb-20"
+          />
         </MotionContainer>
 
         {/* Blog grid — standalone motion so Load More items animate correctly */}

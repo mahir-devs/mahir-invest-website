@@ -398,27 +398,25 @@ export const ProfilePage = () => {
             >
               {/* Inner Card 1: User Avatar & Header Bar */}
               <div className="relative bg-sky-200/40 border border-sky-300/40 rounded-[24px] sm:rounded-[28px] p-5 sm:p-7 flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6 text-center sm:text-left">
-                {/* Clean Top-Right Edit Button inside Inner Card 1 */}
-                <div className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20">
+                {/* Right Edit Button inside Inner Card 1 */}
+                <div className="absolute top-4 right-4 sm:top-1/2 sm:-translate-y-1/2 sm:right-7 z-20">
                   {!isEditing ? (
                     <button
                       type="button"
                       onClick={() => setIsEditing(true)}
                       title="Edit Profile"
-                      className="p-2 sm:px-3.5 sm:py-2 rounded-full bg-white/90 hover:bg-white text-slate-800 hover:text-[var(--blue-normal)] active:scale-95 shadow-md border border-white/80 transition-all flex items-center gap-1.5 cursor-pointer group"
+                      className="px-5 sm:px-8 py-2 sm:py-2.5 rounded-full bg-[var(--blue-normal)] hover:bg-[var(--blue-normal-hover)] text-white text-xs sm:text-sm font-medium shadow-md transition-all active:scale-95 cursor-pointer border-none"
                     >
-                      <Pencil className="w-4 h-4 text-slate-700 group-hover:text-[var(--blue-normal)] transition-colors" />
-                      <span className="text-xs font-semibold hidden sm:inline-block">Edit Profile</span>
+                      Edit
                     </button>
                   ) : (
                     <button
                       type="button"
                       onClick={handleCancelEdit}
                       title="Cancel Editing"
-                      className="p-2 sm:px-3.5 sm:py-2 rounded-full bg-slate-200/90 hover:bg-slate-300 text-slate-700 active:scale-95 shadow-md border border-slate-300 transition-all flex items-center gap-1.5 cursor-pointer group"
+                      className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-slate-200/90 hover:bg-slate-300 text-slate-700 text-xs sm:text-sm font-medium shadow-sm transition-all active:scale-95 cursor-pointer border-none"
                     >
-                      <X className="w-4 h-4 text-slate-700" />
-                      <span className="text-xs font-semibold hidden sm:inline-block">Cancel</span>
+                      Cancel
                     </button>
                   )}
                 </div>
@@ -451,7 +449,7 @@ export const ProfilePage = () => {
                 </div>
 
                 {/* User Info */}
-                <div className="space-y-1.5 w-full pr-0 sm:pr-24">
+                <div className="space-y-1.5 w-full pr-0 sm:pr-32">
                   <h2 className="text-lg sm:text-2xl font-semibold text-slate-900 leading-tight">
                     {loading ? (
                       <span className="inline-block w-36 h-7 bg-slate-300/60 animate-pulse rounded-md" />
@@ -636,19 +634,19 @@ export const ProfilePage = () => {
 
                   {/* Form Action Buttons */}
                   {isEditing && (
-                    <div className="flex flex-col-reverse xs:flex-row justify-end items-stretch xs:items-center gap-2.5 pt-2">
+                    <div className="flex flex-row xs:flex-row justify-end items-stretch xs:items-center gap-2.5 pt-2">
                       <Button
                         type="button"
                         onClick={handleCancelEdit}
                         disabled={updating}
-                        className="bg-slate-200/80 hover:bg-slate-300 text-slate-700 rounded-xl px-4 py-2 text-xs sm:text-sm font-medium border-none shadow-none cursor-pointer h-10 sm:h-auto"
+                        className="bg-slate-200/80 hover:bg-slate-300 text-slate-700 rounded-full px-4 py-2 text-xs sm:text-sm font-medium border-none shadow-none cursor-pointer h-10 sm:h-auto"
                       >
                         Cancel
                       </Button>
                       <Button
                         type="submit"
                         disabled={updating}
-                        className="bg-[var(--blue-normal)] hover:bg-[var(--blue-normal-hover)] text-white rounded-xl px-5 py-2 text-xs sm:text-sm font-medium shadow-md cursor-pointer border-none h-10 sm:h-auto flex items-center justify-center gap-2"
+                        className="bg-[var(--blue-normal)] hover:bg-[var(--blue-normal-hover)] text-white rounded-full px-5 py-2 text-xs sm:text-sm font-medium shadow-md cursor-pointer border-none h-10 sm:h-auto flex items-center justify-center gap-2"
                       >
                         {updating ? (
                           <Loader2 className="w-4 h-4 animate-spin" />

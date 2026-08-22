@@ -260,8 +260,8 @@ export const PersonalDetailsPage = () => {
               )}
             </div>
 
-            {/* Address & State 2-Column Row */}
-            <div className="grid grid-cols-2 gap-3">
+            {/* Address & State Row (Column on mobile, 2 columns on sm+) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {/* Address Input (Optional) */}
               <div className="space-y-1">
                 <label htmlFor="address" className="text-xs sm:text-sm font-medium text-slate-700 block truncate">

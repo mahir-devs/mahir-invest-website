@@ -84,51 +84,92 @@ export const ExpensiveItemsSection: React.FC = () => {
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  // GSAP Smooth Continuous Forward Sliding & Scaling Transition
+  // GSAP Smooth Continuous Forward Sliding & Scale-Aware Equal Distance Transition
   useEffect(() => {
     if (!trackRef.current) return;
 
-    // Calculate exact card step distance dynamically (card width + computed CSS gap)
     const cardEl = cardRefs.current[activeIndex];
     if (!cardEl) return;
 
-    const cardWidth = cardEl.offsetWidth || 150;
-    const computedStyle = window.getComputedStyle(trackRef.current);
-    const gap = parseFloat(computedStyle.gap) || 12;
-    const step = cardWidth + gap;
+    const cardWidth = cardEl.offsetWidth || 280;
+    const windowWidth = window.innerWidth;
+    const isMobile = windowWidth < 640;
+    const isTablet = windowWidth >= 640 && windowWidth < 1024;
+    const visualGap = isMobile ? 14 : isTablet ? 20 : 24;
 
-    // Center offset relative to track container width
     const trackContainer = trackRef.current.parentElement;
-    const containerWidth = trackContainer?.offsetWidth || window.innerWidth;
-    const centerOffset = containerWidth / 2 - cardWidth / 2;
+    const containerWidth = trackContainer?.offsetWidth || windowWidth;
 
-    const targetX = -activeIndex * step + centerOffset;
-    const isMobile = window.innerWidth < 640;
+    // Helper to calculate card scale by distance from focus index
+    const getScaleForDist = (dist: number) => {
+      if (dist === 0) return isMobile ? 1.08 : 1.14;
+      if (dist === 1) return isMobile ? 0.94 : 0.92;
+      return 0.82;
+    };
 
-    // 1. GSAP Track Horizontal Shift (ALWAYS FORWARD)
+    // 1. Calculate scales for all items
+    const scales = carouselItems.map((_, idx) => getScaleForDist(Math.abs(idx - activeIndex)));
+
+    // 2. Calculate exact target center for each card relative to active card (0)
+    // Ensures visual gap (space between card edges) is ALWAYS equal to visualGap
+    const targetCenters: number[] = new Array(carouselItems.length).fill(0);
+
+    for (let i = activeIndex + 1; i < carouselItems.length; i++) {
+      const prevScale = scales[i - 1];
+      const currScale = scales[i];
+      const step = (cardWidth * (prevScale + currScale)) / 2 + visualGap;
+      targetCenters[i] = targetCenters[i - 1] + step;
+    }
+
+    for (let i = activeIndex - 1; i >= 0; i--) {
+      const nextScale = scales[i + 1];
+      const currScale = scales[i];
+      const step = (cardWidth * (nextScale + currScale)) / 2 + visualGap;
+      targetCenters[i] = targetCenters[i + 1] - step;
+    }
+
+    // 3. Track horizontal shift: centers active card flex center at container center
+    const activeFlexCenter = activeIndex * cardWidth + cardWidth / 2;
+    const targetTrackX = containerWidth / 2 - activeFlexCenter;
+
+    // Shift Track Horizontal Position
     gsap.to(trackRef.current, {
-      x: targetX,
+      x: targetTrackX,
       duration: 0.45,
       ease: 'power3.inOut',
       overwrite: 'auto',
       onComplete: () => {
-        // If we reach or exceed set 2, silently snap back to set 1 without animation
         if (activeIndex >= baseCount * 2) {
           const resetIndex = activeIndex - baseCount;
-          const resetX = -resetIndex * step + centerOffset;
+          const resetFlexCenter = resetIndex * cardWidth + cardWidth / 2;
+          const resetTrackX = containerWidth / 2 - resetFlexCenter;
 
-          // Silent instant position snap
-          gsap.set(trackRef.current, { x: resetX });
+          gsap.set(trackRef.current, { x: resetTrackX });
 
-          // Instantly update card GSAP styles for resetIndex
+          const resetScales = carouselItems.map((_, idx) => getScaleForDist(Math.abs(idx - resetIndex)));
+          const resetCenters: number[] = new Array(carouselItems.length).fill(0);
+
+          for (let i = resetIndex + 1; i < carouselItems.length; i++) {
+            const step = (cardWidth * (resetScales[i - 1] + resetScales[i])) / 2 + visualGap;
+            resetCenters[i] = resetCenters[i - 1] + step;
+          }
+          for (let i = resetIndex - 1; i >= 0; i--) {
+            const step = (cardWidth * (resetScales[i + 1] + resetScales[i])) / 2 + visualGap;
+            resetCenters[i] = resetCenters[i + 1] - step;
+          }
+
           carouselItems.forEach((_, idx) => {
             const el = cardRefs.current[idx];
             if (!el) return;
+            const unscaledOffset = (idx - resetIndex) * cardWidth;
+            const offsetX = resetCenters[idx] - unscaledOffset;
             const dist = Math.abs(idx - resetIndex);
+
             gsap.set(el, {
-              scale: dist === 0 ? (isMobile ? 1.08 : 1.14) : dist === 1 ? (isMobile ? 0.94 : 0.92) : 0.82,
+              x: offsetX,
+              scale: resetScales[idx],
               y: dist === 0 ? (isMobile ? -6 : -12) : 0,
-              opacity: dist === 0 ? 1 : dist === 1 ? 0.85 : 0.5,
+              opacity: dist === 0 ? 1 : dist === 1 ? 0.85 : 0.45,
             });
           });
 
@@ -137,49 +178,29 @@ export const ExpensiveItemsSection: React.FC = () => {
       },
     });
 
-    // 2. GSAP Individual Card Scale, Opacity & Y Lift
+    // 4. Animate each individual card to scale, y-offset, opacity & calculated scale-aware x position
     carouselItems.forEach((_, idx) => {
       const el = cardRefs.current[idx];
       if (!el) return;
 
+      const unscaledOffset = (idx - activeIndex) * cardWidth;
+      const offsetX = targetCenters[idx] - unscaledOffset;
       const dist = Math.abs(idx - activeIndex);
 
-      if (dist === 0) {
-        // Center Active Card Focus
-        gsap.to(el, {
-          scale: isMobile ? 1.08 : 1.14,
-          y: isMobile ? -6 : -12,
-          opacity: 1,
-          duration: 0.45,
-          ease: 'power3.inOut',
-          overwrite: 'auto',
-        });
-      } else if (dist === 1) {
-        // Immediate Neighbors
-        gsap.to(el, {
-          scale: isMobile ? 0.94 : 0.92,
-          y: 0,
-          opacity: 0.85,
-          duration: 0.45,
-          ease: 'power3.inOut',
-          overwrite: 'auto',
-        });
-      } else {
-        // Outer Cards
-        gsap.to(el, {
-          scale: 0.82,
-          y: 4,
-          opacity: 0.45,
-          duration: 0.45,
-          ease: 'power3.inOut',
-          overwrite: 'auto',
-        });
-      }
+      gsap.to(el, {
+        x: offsetX,
+        scale: scales[idx],
+        y: dist === 0 ? (isMobile ? -6 : -12) : 0,
+        opacity: dist === 0 ? 1 : dist === 1 ? 0.85 : 0.45,
+        duration: 0.45,
+        ease: 'power3.inOut',
+        overwrite: 'auto',
+      });
     });
   }, [activeIndex, baseCount, carouselItems.length]);
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-[#e7f4fa] via-[#dbeef8]/50 to-[#e7f4fa] py-12 sm:py-24 overflow-hidden select-none">
+    <section className="relative w-full bg-gradient-to-b from-[#e7f4fa] via-[#dbeef8]/50 to-[#e7f4fa] pt-4 sm:pt-8 pb-12 sm:pb-20 overflow-hidden select-none">
       {/* Background Image Asset */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
         <Image
@@ -191,28 +212,28 @@ export const ExpensiveItemsSection: React.FC = () => {
         />
       </div>
 
-      <div className="relative max-w-7xl mx-auto space-y-8 sm:space-y-14 z-10 text-center px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto  z-10 text-center px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <div className="space-y-2 max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-normal text-slate-900 tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-normal text-slate-900 tracking-tight leading-tight">
             Somethings that are more expensive than{' '}
-            <span className="relative inline-block font-normal text-slate-900">
+            <br /> <span className="relative inline-block font-normal text-slate-900">
               our plans
               <BlueLineIcons />
             </span>
           </h2>
         </div>
 
-        {/* Carousel Container - Ample vertical padding & min-height for mobile */}
+        {/* Carousel Container - Ample vertical padding & min-height to prevent top clipping */}
         <div
-          className="relative w-full py-10 sm:py-16 overflow-hidden flex items-center min-h-[290px] xs:min-h-[320px] sm:min-h-[380px]"
+          className="relative w-full overflow-hidden flex items-center py-6 sm:py-10 min-h-[310px] xs:min-h-[340px] sm:min-h-[370px] lg:min-h-[400px]"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           {/* GSAP Continuous Horizontal Sliding Track */}
           <div
             ref={trackRef}
-            className="flex items-center gap-3 sm:gap-6 absolute left-0 will-change-transform"
+            className="flex items-center gap-0 absolute left-0 will-change-transform py-4 sm:py-6"
           >
             {carouselItems.map((item, idx) => {
               const isCenter = idx === activeIndex;
@@ -222,14 +243,14 @@ export const ExpensiveItemsSection: React.FC = () => {
                   key={`${item.id}-${idx}`}
                   ref={(el) => { cardRefs.current[idx] = el; }}
                   onClick={() => setActiveIndex(idx)}
-                  className="cursor-pointer shrink-0 will-change-transform py-3 sm:py-4"
+                  className="cursor-pointer shrink-0 will-change-transform py-5 sm:py-8"
                 >
                   <GlassCard
                     variant={isCenter ? 'frosted' : 'pure-glass'}
                     rounded="2xl"
                     padding="none"
                     className={cn(
-                      'text-center flex flex-col items-center justify-center border border-white shadow-xl transition-colors duration-300',
+                      'text-center flex flex-col items-center justify-center border border-white shadow-none transition-colors duration-300',
                       'w-[145px] xs:w-[175px] sm:w-[250px] lg:w-[280px] h-[145px] xs:h-[175px] sm:h-[235px] lg:h-[250px] p-3 sm:p-6 lg:p-7'
                     )}
                   >
@@ -261,11 +282,11 @@ export const ExpensiveItemsSection: React.FC = () => {
         </div>
 
         {/* Bottom Mint Glass Pill Banner */}
-        <GlassCard padding="sm" variant="emerald" className="rounded-full max-w-6xl shadow-none mx-auto">
+        <GlassCard padding="sm" variant="emerald" className="rounded-full border border-[#00AD17] !bg-[#00AD17]/8 max-w-6xl shadow-none mx-auto">
           <div>
-            <p className="text-sm sm:text-base lg:text-[23px] text-[#0f8b4d] font-medium tracking-wide">
+            <p className="text-[10px] sm:text-base lg:text-[23px] text-[#00AD17] font-medium tracking-wide">
               You spend on these without thinking. Why not spend{' '}
-              <strong className="font-bold text-[#0c7a42]">₹14</strong> thinking
+              <strong className="font-bold text-[#00AD17]">₹14</strong> thinking
               about your money?
             </p>
           </div>

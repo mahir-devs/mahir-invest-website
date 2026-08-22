@@ -22,6 +22,8 @@ import { EmailOtpVerificationModal, EmailVerifiedSuccessModal, EmailInputModal }
 import { cn } from '@/lib/utils';
 import { toast } from '@/components/ui/toast';
 import { SuspenseFallback } from '@/components/common/loading/suspense-fallback';
+import { SectionHeader } from '@/components/common/section-header';
+
 
 
 export interface PricingPlan {
@@ -168,10 +170,16 @@ export interface PricingSectionProps {
   onOpenChange?: (open: boolean) => void;
   autoOpenPlanId?: string;
   isHeadingDark?: boolean;
+  eyebrow?: React.ReactNode;
   eyebrowText?: string;
-  title?: string;
-  subtitle?: string;
+  hideEyebrow?: boolean;
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
   hideSubtitle?: boolean;
+  eyebrowClassName?: string;
+  titleClassName?: string;
+  subtitleClassName?: string;
+  headerClassName?: string;
 }
 
 const PricingSectionInner: React.FC<PricingSectionProps> = ({
@@ -180,10 +188,16 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
   onOpenChange,
   autoOpenPlanId,
   isHeadingDark = false,
+  eyebrow,
   eyebrowText,
+  hideEyebrow = false,
   title,
   subtitle,
   hideSubtitle = false,
+  eyebrowClassName,
+  titleClassName,
+  subtitleClassName,
+  headerClassName,
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -498,7 +512,7 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
   };
 
   return (
-    <section className="relative w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 select-none">
+    <section className={cn("relative w-full px-4 sm:px-6 lg:px-8 select-none", hideBackground ? "pt-0 pb-12 sm:pb-16" : "py-16 sm:py-24")}>
       {!hideBackground && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <Image
@@ -514,40 +528,19 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
 
       <MotionContainer staggerDelay={0.15} delay={0.1} className="relative max-w-7xl mx-auto z-10 space-y-12">
         {/* Header Title & Subtitle */}
-        <div className="space-y-3 text-center max-w-3xl mx-auto">
-          {eyebrowText && (
-            <MotionItem direction="down" duration={0.5}>
-              <span className="inline-flex items-center text-white/60 gap-1.5 px-3 py-1 rounded-full text-xs font-normal uppercase tracking-widest">
-                {eyebrowText}
-              </span>
-            </MotionItem>
-          )}
-
-          <MotionItem direction="scaleDown" scale={1.15} duration={0.6}>
-            <h1
-              className={cn(
-                'text-4xl sm:text-6xl lg:text-[68px] font-normal tracking-tight leading-tight drop-shadow-sm',
-                isHeadingDark ? 'text-white' : 'text-slate-900'
-              )}
-            >
-              {title || 'Simple, Transparent Pricing'}
-            </h1>
-          </MotionItem>
-
-          {!hideSubtitle && (
-            <MotionItem direction="up" distance={15} duration={0.5}>
-              <p
-                className={cn(
-                  'text-xs sm:text-base lg:text-[16px] font-normal leading-relaxed max-w-2xl mx-auto',
-                  isHeadingDark ? 'text-white/60' : 'text-slate-500'
-                )}
-              >
-                {subtitle ||
-                  'Choose the financial plan that fits your wealth creation journey. No hidden fees, no commission conflicts.'}
-              </p>
-            </MotionItem>
-          )}
-        </div>
+        <SectionHeader
+          eyebrow={eyebrow}
+          eyebrowText={eyebrowText}
+          hideEyebrow={hideEyebrow}
+          title={title}
+          subtitle={subtitle}
+          hideSubtitle={hideSubtitle}
+          isHeadingDark={isHeadingDark}
+          eyebrowClassName={eyebrowClassName}
+          titleClassName={titleClassName}
+          subtitleClassName={subtitleClassName}
+          className={headerClassName}
+        />
 
         {/* Pricing Card Outer Box */}
         <MotionItem direction="up" distance={30} duration={0.65} className="w-full max-w-xs sm:max-w-md md:max-w-5xl mx-auto">
@@ -787,7 +780,9 @@ const PricingSectionInner: React.FC<PricingSectionProps> = ({
 export const PricingSection: React.FC<PricingSectionProps> = (props) => {
   return (
     <Suspense fallback={<SuspenseFallback variant="pricing" />}>
-      <PricingSectionInner {...props} />
+      <div className=''>
+        <PricingSectionInner {...props} />
+      </div>
     </Suspense>
   );
 };

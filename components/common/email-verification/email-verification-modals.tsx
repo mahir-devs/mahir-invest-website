@@ -238,10 +238,10 @@ export const EmailOtpVerificationModal: React.FC<EmailOtpVerificationModalProps>
             type="submit"
             disabled={loading || otp.join('').length < codeLength}
             className={cn(
-              'w-full py-3.5 rounded-full font-medium text-sm sm:text-base transition-all shadow-sm cursor-pointer border flex items-center justify-center gap-2',
+              'w-full py-5 rounded-full mt-10 font-normal text-sm  sm:text-base transition-all  shadow-sm cursor-pointer border flex items-center justify-center gap-2',
               otp.join('').length === codeLength
-                ? 'bg-[var(--blue-normal)] hover:bg-sky-600 text-white border-[var(--blue-normal)] shadow-sky-900/10'
-                : 'bg-white border-sky-300 text-sky-400 hover:bg-sky-50/50'
+                ? 'bg-[var(--blue-normal)]   hover:bg-sky-600 !text-white border-[var(--blue-normal)] shadow-sky-900/10'
+                : 'bg-white border-[var(--blue-normal)] !text-black  hover:bg-sky-50/50'
             )}
           >
             {loading ? (
@@ -255,7 +255,7 @@ export const EmailOtpVerificationModal: React.FC<EmailOtpVerificationModalProps>
           </Button>
 
           {/* Resend OTP Section */}
-          <div className="text-center pt-1">
+          <div className="text-center -mt-2">
             {timeLeft > 0 ? (
               <p className="text-xs text-slate-400 font-normal">
                 Didn&apos;t receive a code?{' '}
